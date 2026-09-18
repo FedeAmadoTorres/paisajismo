@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Estudio P Paisajismo · Lautaro Parente · La Plata</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --verde: #7aba4c;
+  --verde-o: #5e9633;
+  --verde-dark: #3a6b1a;
+  --negro: #2a2a2a;
+  --gris: #555;
+  --gris-claro: #f7f7f5;
+  --crema: #f5f2ed;
+  --cremao: #ebe5db;
+  --blanco: #ffffff;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Jost',sans-serif;background:var(--blanco);color:var(--negro);overflow-x:hidden;cursor:none;}
+
+/* CURSOR */
+#cur{width:8px;height:8px;background:var(--verde);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .08s;}
+#curring{width:34px;height:34px;border:1.5px solid var(--verde);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:left .18s ease,top .18s ease;}
+body:hover #cur{opacity:1;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:28px 64px;display:flex;justify-content:space-between;align-items:center;transition:all .4s;}
+nav.s{background:rgba(255,255,255,.97);backdrop-filter:blur(16px);padding:14px 64px;box-shadow:0 1px 0 rgba(0,0,0,.08);}
+.nlogo{display:flex;align-items:center;}
+.nlogo img{height:72px;width:auto;display:block;transition:filter .4s;}
+nav:not(.s) .nlogo img{filter:brightness(0) invert(1);}
+nav.s .nlogo img{filter:none;}
+.nlinks{display:flex;gap:36px;list-style:none;}
+.nlinks a{font-size:13px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.85);text-decoration:none;transition:color .3s;position:relative;}
+nav.s .nlinks a{color:var(--gris);}
+.nlinks a:hover{color:var(--verde) !important;}
+.nlinks a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1.5px;background:var(--verde);transform:scaleX(0);transition:transform .3s;}
+.nlinks a:hover::after{transform:scaleX(1);}
+.nlinks a:hover{color:var(--verde-o);}
+
+/* HERO */
+.hero{height:100vh;position:relative;display:flex;align-items:flex-end;overflow:hidden;padding-top:74px;}
+.hbg{position:absolute;inset:0;
+  background:linear-gradient(165deg,rgba(20,30,12,.88) 0%,rgba(40,70,20,.55) 55%,rgba(90,140,50,.2) 100%),
+  url('https://images.unsplash.com/photo-1585320806297-9794b3e4aaae?w=1900&q=85') center/cover no-repeat;
+  animation:hzoom 14s ease-out forwards;}
+@keyframes hzoom{from{transform:scale(1.07);}to{transform:scale(1);}}
+.hcontent{position:relative;z-index:2;padding:0 64px 100px;max-width:800px;opacity:0;animation:hfade 1.2s .4s forwards;}
+@keyframes hfade{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+.htag{font-size:10px;font-weight:500;letter-spacing:4px;text-transform:uppercase;color:var(--verde);margin-bottom:20px;display:flex;align-items:center;gap:12px;}
+.htag::before{content:'';display:block;width:36px;height:1.5px;background:var(--verde);}
+.htitle{font-family:'Cormorant Garamond',serif;font-size:clamp(52px,7.5vw,98px);font-weight:300;line-height:1;color:#fff;margin-bottom:24px;}
+.htitle em{font-style:italic;color:var(--verde);}
+.hdesc{font-size:15px;font-weight:300;line-height:1.85;color:rgba(255,255,255,.68);max-width:480px;margin-bottom:44px;}
+.hcta{display:inline-flex;align-items:center;gap:14px;border:1.5px solid rgba(255,255,255,.4);color:#fff;padding:15px 38px;font-family:'Jost',sans-serif;font-size:10px;font-weight:500;letter-spacing:3px;text-transform:uppercase;text-decoration:none;transition:all .35s;}
+.hcta:hover{background:var(--verde);border-color:var(--verde);transform:translateX(5px);}
+.hscroll{position:absolute;bottom:40px;right:64px;z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;color:rgba(255,255,255,.35);font-size:9px;letter-spacing:3px;text-transform:uppercase;animation:sc 2.5s infinite;}
+@keyframes sc{0%,100%{transform:translateY(0);}50%{transform:translateY(7px);}}
+.hscroll::after{content:'';width:1px;height:46px;background:linear-gradient(to bottom,rgba(255,255,255,.3),transparent);}
+
+/* LOGO GRANDE hero derecha */
+.hlogo-deco{position:absolute;right:64px;top:50%;transform:translateY(-50%);z-index:2;opacity:0;animation:hfade 1.4s .7s forwards;}
+.hlogo-deco img{height:180px;filter:brightness(0) invert(1);opacity:.12;}
+
+/* MARQUEE */
+.marq{background:var(--cremao);height:70px;display:flex;align-items:center;overflow:hidden;}
+.marq-inner{display:flex;white-space:nowrap;animation:mq 24s linear infinite;}
+@keyframes mq{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+.marq-item{font-family:'Cormorant Garamond',serif;font-size:13px;font-weight:400;letter-spacing:4px;text-transform:uppercase;color:var(--gris);padding:0 30px;display:inline-flex;align-items:center;gap:30px;}
+.marq-item::after{content:'';width:5px;height:5px;background:var(--verde);border-radius:50%;display:inline-block;}
+
+/* INTRO */
+.intro{padding:110px 64px;display:grid;grid-template-columns:1fr 1fr;gap:90px;align-items:center;}
+.stag{font-size:10px;font-weight:500;letter-spacing:4px;text-transform:uppercase;color:var(--verde-o);margin-bottom:18px;display:flex;align-items:center;gap:12px;}
+.stag::before{content:'';display:block;width:28px;height:1.5px;background:var(--verde);}
+h2.big{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,3.8vw,50px);font-weight:300;line-height:1.15;color:var(--negro);margin-bottom:24px;}
+h2.big em{font-style:italic;color:var(--verde-o);}
+.body-p{font-size:15px;font-weight:300;line-height:1.95;color:var(--gris);margin-bottom:12px;}
+.istats{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:40px;}
+.stat{border-left:2.5px solid var(--verde);padding-left:16px;}
+.snum{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:300;color:var(--negro);line-height:1;}
+.slabel{font-size:11px;font-weight:400;color:var(--gris);margin-top:3px;}
+.iimgs{position:relative;height:520px;}
+.iimg1{position:absolute;top:0;left:0;width:80%;height:80%;object-fit:cover;display:block;}
+.iimg2{position:absolute;bottom:0;right:0;width:56%;height:54%;object-fit:cover;border:6px solid #fff;display:block;}
+.ibadge{position:absolute;top:20px;right:-14px;background:var(--negro);color:#fff;padding:16px 14px;text-align:center;width:108px;z-index:2;}
+.ibadge img{width:80px;filter:brightness(0) invert(1);opacity:.9;}
+.ibadge span{display:block;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--verde);margin-top:6px;}
+
+/* SERVICIOS */
+.servicios{background:var(--negro);padding:110px 64px;}
+.sh{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:60px;}
+.sh h2{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,4vw,52px);font-weight:300;color:#fff;line-height:1.1;}
+.sh h2 em{font-style:italic;color:var(--verde);}
+.sh p{max-width:300px;font-size:13px;font-weight:300;color:rgba(255,255,255,.4);line-height:1.8;}
+.sgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.06);}
+.scard{background:var(--negro);padding:42px 30px;border:none;transition:background .4s;position:relative;overflow:hidden;}
+.scard::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--verde);transform:scaleX(0);transition:transform .4s;}
+.scard:hover{background:#1a1a1a;}
+.scard:hover::after{transform:scaleX(1);}
+.snum2{font-family:'Cormorant Garamond',serif;font-size:46px;font-weight:300;color:rgba(255,255,255,.05);line-height:1;margin-bottom:18px;}
+.sico{font-size:24px;margin-bottom:16px;display:block;}
+.scard h3{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:400;color:#fff;margin-bottom:10px;}
+.scard p{font-size:13px;font-weight:300;color:rgba(255,255,255,.42);line-height:1.8;}
+.slink{display:inline-flex;align-items:center;gap:8px;color:var(--verde);font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;text-decoration:none;margin-top:22px;transition:gap .3s;}
+.slink:hover{gap:14px;}
+
+/* GALERÍA */
+.galeria{padding:110px 64px;background:var(--gris-claro);}
+.gh{text-align:center;margin-bottom:60px;}
+.gh h2{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,4vw,52px);font-weight:300;color:var(--negro);margin-bottom:12px;}
+.gh h2 em{font-style:italic;color:var(--verde-o);}
+.gh p{font-size:14px;font-weight:300;color:var(--gris);max-width:460px;margin:0 auto;line-height:1.8;}
+.ggrid{display:grid;grid-template-columns:repeat(12,1fr);gap:6px;}
+.gi{overflow:hidden;position:relative;background:#c8d8b8;}
+.gi img{width:100%;height:100%;object-fit:cover;transition:transform .7s ease;display:block;}
+.gi:hover img{transform:scale(1.06);}
+.gio{position:absolute;inset:0;background:linear-gradient(to top,rgba(30,50,15,.75) 0%,transparent 55%);opacity:0;transition:opacity .4s;display:flex;align-items:flex-end;padding:18px;}
+.gi:hover .gio{opacity:1;}
+.giolabel{font-family:'Cormorant Garamond',serif;font-size:15px;color:#fff;font-weight:300;}
+.gi1{grid-column:span 7;grid-row:span 2;height:460px;}
+.gi2{grid-column:span 5;height:227px;}
+.gi3{grid-column:span 5;height:227px;}
+.gi4{grid-column:span 4;height:228px;}
+.gi5{grid-column:span 4;height:228px;}
+.gi6{grid-column:span 4;height:228px;}
+
+/* SOBRE */
+.sobre{padding:110px 64px;background:#fff;display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center;}
+.simgs{position:relative;height:540px;}
+.simg1{position:absolute;top:0;left:0;width:76%;height:76%;object-fit:cover;display:block;}
+.simg2{position:absolute;bottom:0;right:0;width:58%;height:55%;object-fit:cover;border:6px solid #fff;display:block;}
+.sdeco{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:96px;height:96px;background:var(--cremao);border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:2;}
+.sdeco img{width:60px;}
+.stxt h2{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,3.5vw,48px);font-weight:300;color:var(--negro);line-height:1.15;margin-bottom:24px;}
+.stxt h2 em{font-style:italic;color:var(--verde-o);}
+.stxt p{font-size:15px;font-weight:300;line-height:1.95;color:var(--gris);margin-bottom:12px;}
+.sfirma{margin-top:34px;padding-top:26px;border-top:1px solid var(--cremao);display:flex;align-items:center;gap:18px;}
+.favatar{width:54px;height:54px;border-radius:50%;background:var(--verde);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:20px;color:#fff;font-weight:600;flex-shrink:0;}
+.finfo strong{display:block;font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;color:var(--negro);}
+.finfo span{font-size:10px;color:var(--gris);letter-spacing:1.5px;text-transform:uppercase;}
+
+/* PROCESO */
+.proceso{padding:110px 64px;background:var(--crema);}
+.proch{text-align:center;margin-bottom:60px;}
+.proch h2{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,4vw,52px);font-weight:300;color:var(--negro);margin-bottom:12px;}
+.proch h2 em{font-style:italic;color:var(--verde-o);}
+.procgrid{display:grid;grid-template-columns:repeat(4,1fr);position:relative;}
+.procgrid::before{content:'';position:absolute;top:32px;left:12%;right:12%;height:1px;background:var(--verde);opacity:.35;z-index:0;}
+.pstep{text-align:center;padding:0 20px;position:relative;z-index:1;}
+.pnum{width:64px;height:64px;border-radius:50%;background:var(--negro);color:#fff;font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;display:flex;align-items:center;justify-content:center;margin:0 auto 22px;border:3px solid var(--crema);}
+.pstep h3{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:400;color:var(--negro);margin-bottom:10px;}
+.pstep p{font-size:13px;font-weight:300;color:var(--gris);line-height:1.8;}
+
+/* CONTACTO */
+.contacto{background:var(--negro);padding:110px 64px;position:relative;overflow:hidden;}
+.contacto::before{content:'';position:absolute;top:-200px;right:-200px;width:550px;height:550px;background:radial-gradient(circle,rgba(122,186,76,.1) 0%,transparent 70%);pointer-events:none;}
+.cin{display:grid;grid-template-columns:1fr 1fr;gap:90px;align-items:start;position:relative;}
+.cleft h2{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,4vw,50px);font-weight:300;color:#fff;line-height:1.1;margin-bottom:20px;}
+.cleft h2 em{font-style:italic;color:var(--verde);}
+.cleft > p{font-size:14px;font-weight:300;color:rgba(255,255,255,.42);line-height:1.9;margin-bottom:40px;}
+.cinfo{display:flex;flex-direction:column;gap:20px;}
+.citem{display:flex;align-items:flex-start;gap:14px;}
+.cico{font-size:18px;margin-top:1px;}
+.citem strong{display:block;font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--verde);margin-bottom:3px;}
+.citem span{font-size:14px;font-weight:300;color:rgba(255,255,255,.6);}
+.csocial{margin-top:32px;display:flex;gap:12px;}
+.csoc{display:flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.55);padding:10px 18px;font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;text-decoration:none;transition:all .3s;}
+.csoc:hover{border-color:var(--verde);color:var(--verde);}
+.cform{display:flex;flex-direction:column;gap:16px;}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.fg{display:flex;flex-direction:column;gap:6px;}
+.fg label{font-size:9px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;color:rgba(122,186,76,.8);}
+.fg input,.fg textarea,.fg select{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:#fff;padding:13px 15px;font-family:'Jost',sans-serif;font-size:13px;font-weight:300;outline:none;transition:border-color .3s,background .3s;border-radius:0;-webkit-appearance:none;}
+.fg select option{background:#2a2a2a;}
+.fg input:focus,.fg textarea:focus,.fg select:focus{border-color:var(--verde);background:rgba(255,255,255,.06);}
+.fg input::placeholder,.fg textarea::placeholder{color:rgba(255,255,255,.17);}
+.fg textarea{resize:none;height:108px;}
+.btn{display:flex;align-items:center;justify-content:center;gap:12px;background:var(--verde);border:none;color:#fff;padding:16px 0;font-family:'Jost',sans-serif;font-size:10px;font-weight:500;letter-spacing:3px;text-transform:uppercase;cursor:none;transition:all .35s;width:100%;}
+.btn:hover{background:var(--verde-o);transform:translateY(-2px);}
+
+/* FOOTER */
+footer{background:#111;padding:32px 64px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.05);}
+.flogo img{height:48px;width:auto;}
+.fcopy{font-size:10px;color:rgba(255,255,255,.2);letter-spacing:.5px;}
+.flinks{display:flex;gap:22px;list-style:none;}
+.flinks a{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.22);text-decoration:none;transition:color .3s;}
+.flinks a:hover{color:var(--verde);}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(34px);transition:opacity .8s ease,transform .8s ease;}
+.rv.on{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.1s;}.d2{transition-delay:.2s;}.d3{transition-delay:.3s;}.d4{transition-delay:.4s;}
+</style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="curring"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#inicio" class="nlogo"><img src="img/01.jpg" alt="Estudio P Paisajismo" style="height:54px;width:auto;display:block;"></a>
+  <ul class="nlinks">
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#galeria">Proyectos</a></li>
+    <li><a href="#sobre">Nosotros</a></li>
+    <li><a href="#proceso">Proceso</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hbg"></div>
+  <div class="hlogo-deco">
+    <img src="img/01.jpg" alt="Estudio P Paisajismo">
+  </div>
+  <div class="hcontent">
+    <div class="htag">Diseño de Espacios Verdes · La Plata · Buenos Aires</div>
+    <h1 class="htitle">
+      Espacios que<br><em>florecen</em><br>con vos
+    </h1>
+    <p class="hdesc">Creamos y diseñamos espacios verdes únicos — jardines residenciales, terrazas y espacios corporativos en La Plata y alrededores. Cada proyecto pensado para durar y evolucionar con el tiempo.</p>
+    <a href="#contacto" class="hcta">Consultá tu proyecto &nbsp;→</a>
+  </div>
+  <div class="hscroll">Scroll</div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marq">
+  <div class="marq-inner">
+    <span class="marq-item">Jardines Residenciales</span>
+    <span class="marq-item">Terrazas & Balcones</span>
+    <span class="marq-item">Espacios Corporativos</span>
+    <span class="marq-item">Jardines Verticales</span>
+    <span class="marq-item">Biofilia</span>
+    <span class="marq-item">Mantenimiento</span>
+    <span class="marq-item">Especies Nativas</span>
+    <span class="marq-item">Iluminación Exterior</span>
+    <span class="marq-item">Jardines Residenciales</span>
+    <span class="marq-item">Terrazas & Balcones</span>
+    <span class="marq-item">Espacios Corporativos</span>
+    <span class="marq-item">Jardines Verticales</span>
+    <span class="marq-item">Biofilia</span>
+    <span class="marq-item">Mantenimiento</span>
+    <span class="marq-item">Especies Nativas</span>
+    <span class="marq-item">Iluminación Exterior</span>
+  </div>
+</div>
+
+<!-- INTRO -->
+<section class="intro" id="filosofia">
+  <div class="rv">
+    <div class="stag">Nuestra filosofía</div>
+    <h2 class="big">El jardín es una <em>extensión de tu hogar</em></h2>
+    <p class="body-p">En Estudio P entendemos cada espacio exterior como una continuación de la vida que sucede adentro. Aplicamos los principios de la <strong>biofilia</strong> — la conexión innata del ser humano con la naturaleza — para crear espacios que generan bienestar, calma y pertenencia.</p>
+    <p class="body-p">Trabajamos con <strong>especies nativas</strong> de la región pampeana que se adaptan naturalmente al entorno, requieren menos agua y mantenimiento, y atraen aves e insectos beneficiosos. Cada jardín se convierte en un pequeño ecosistema vivo.</p>
+    <div class="istats">
+      <div class="stat rv d1"><div class="snum">+80</div><div class="slabel">Proyectos realizados</div></div>
+      <div class="stat rv d2"><div class="snum">8</div><div class="slabel">Años de experiencia</div></div>
+      <div class="stat rv d3"><div class="snum">100%</div><div class="slabel">Dedicación en cada proyecto</div></div>
+      <div class="stat rv d4"><div class="snum">LP</div><div class="slabel">La Plata y alrededores</div></div>
+    </div>
+  </div>
+  <div class="iimgs rv d2">
+    <img class="iimg1" src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=700&q=80" alt="Jardín diseñado por Lautaro Parente">
+    <img loading="lazy" decoding="async" class="iimg2" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&q=80" alt="Terraza paisajismo La Plata">
+    <div class="ibadge" style="background:var(--negro);padding:14px;width:120px;">
+      <svg viewBox="0 0 340 115" xmlns="http://www.w3.org/2000/svg" style="width:92px;"><ellipse cx="105" cy="26" rx="92" ry="22" fill="#7aba4c" transform="rotate(-7,105,26)"/><ellipse cx="245" cy="86" rx="46" ry="14" fill="#7aba4c" transform="rotate(-5,245,86)"/><text x="6" y="70" font-family="Jost,Arial,sans-serif" font-size="33" font-weight="600" letter-spacing="9" fill="#fff">ESTUDIO P</text><text x="6" y="100" font-family="Jost,Arial,sans-serif" font-size="15" font-weight="300" letter-spacing="7" fill="#fff">PAISAJISMO</text></svg>
+      <span style="display:block;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--verde);margin-top:6px;">La Plata, BsAs</span>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section class="servicios" id="servicios">
+  <div class="sh rv">
+    <div>
+      <div class="stag" style="color:var(--verde);">Lo que hacemos</div>
+      <h2>Nuestros<br><em>servicios</em></h2>
+    </div>
+    <p>Desde el primer boceto hasta el mantenimiento continuo, acompañamos cada etapa de tu espacio verde.</p>
+  </div>
+  <div class="sgrid">
+    <div class="scard rv">
+      <div class="snum2">01</div>
+      <span class="sico">🌿</span>
+      <h3>Jardines Residenciales</h3>
+      <p>Diseño y ejecución de jardines para casas y PH. Analizamos el suelo, la luz y tus gustos para crear un espacio único integrado a tu vida diaria.</p>
+      <a href="#contacto" class="slink">Consultá →</a>
+    </div>
+    <div class="scard rv d1">
+      <div class="snum2">02</div>
+      <span class="sico">🪴</span>
+      <h3>Terrazas & Balcones</h3>
+      <p>Transformamos terrazas y balcones en oasis urbanos. Selección de plantas, mobiliario, sistemas de riego y ambientación completa.</p>
+      <a href="#contacto" class="slink">Consultá →</a>
+    </div>
+    <div class="scard rv d2">
+      <div class="snum2">03</div>
+      <span class="sico">🏢</span>
+      <h3>Espacios Corporativos</h3>
+      <p>Diseño de áreas verdes para oficinas, locales y restaurantes. Ambientes que generan bienestar y proyectan una imagen profesional.</p>
+      <a href="#contacto" class="slink">Consultá →</a>
+    </div>
+    <div class="scard rv d1">
+      <div class="snum2">04</div>
+      <span class="sico">🌱</span>
+      <h3>Jardines Verticales</h3>
+      <p>Paredes verdes para interiores y exteriores. Solución perfecta para espacios reducidos que necesitan vida vegetal y frescura.</p>
+      <a href="#contacto" class="slink">Consultá →</a>
+    </div>
+    <div class="scard rv d2">
+      <div class="snum2">05</div>
+      <span class="sico">✂️</span>
+      <h3>Mantenimiento</h3>
+      <p>Planes de mantenimiento periódico para que tu jardín esté siempre en su mejor estado. Poda, fertilización, riego y cuidado estacional.</p>
+      <a href="#contacto" class="slink">Consultá →</a>
+    </div>
+    <div class="scard rv d3">
+      <div class="snum2">06</div>
+      <span class="sico">💡</span>
+      <h3>Iluminación & Riego</h3>
+      <p>Sistemas de riego automático e iluminación exterior que realzan el jardín de noche y optimizan el consumo de agua.</p>
+      <a href="#contacto" class="slink">Consultá →</a>
+    </div>
+  </div>
+</section>
+
+<!-- GALERÍA -->
+<section class="galeria" id="galeria">
+  <div class="gh rv">
+    <div class="stag" style="justify-content:center;">Nuestros proyectos</div>
+    <h2 class="big">Cada espacio, <em>una historia</em></h2>
+    <p>Proyectos de paisajismo en La Plata y Barrio San Benito. Jardines que integran biofilia, especies nativas y diseño contemporáneo.</p>
+  </div>
+  <div class="ggrid rv">
+    <div class="gi gi1">
+      <img loading="lazy" decoding="async" src="img/02.jpg" alt="Jardín interior · árbol otoñal">
+      <div class="gio"><span class="giolabel">Jardín interior · árbol otoñal</span></div>
+    </div>
+    <div class="gi gi2">
+      <img loading="lazy" decoding="async" src="img/03.jpg" alt="Jardín interno · vista nocturna">
+      <div class="gio"><span class="giolabel">Jardín interno · atardecer</span></div>
+    </div>
+    <div class="gi gi3">
+      <img loading="lazy" decoding="async" src="img/04.jpg" alt="Jardín interno · vista lateral">
+      <div class="gio"><span class="giolabel">Jardín interno · vista lateral</span></div>
+    </div>
+    <div class="gi gi4">
+      <img loading="lazy" decoding="async" src="img/05.jpg" alt="Jardín interno · vista exterior">
+      <div class="gio"><span class="giolabel">Vista exterior · acceso</span></div>
+    </div>
+    <div class="gi gi5">
+      <img loading="lazy" decoding="async" src="img/06.jpg" alt="Jardín interno · luz natural">
+      <div class="gio"><span class="giolabel">Jardín interno · luz natural</span></div>
+    </div>
+    <div class="gi gi6">
+      <img loading="lazy" decoding="async" src="img/07.jpg" alt="Jardín interno · vista pasillo">
+      <div class="gio"><span class="giolabel">Vista pasillo · gramíneas</span></div>
+    </div>
+  </div>
+
+  <!-- PROYECTO 2: Barrio San Benito -->
+  <div style="margin-top:48px;">
+    <div style="text-align:center;margin-bottom:28px;">
+      <div class="stag" style="justify-content:center;margin-bottom:8px;">Proyecto · 2023</div>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--negro);">Vivienda Mariana y Fernando <em style="font-style:italic;color:var(--verde-o);">· Barrio San Benito</em></h3>
+      <p style="font-size:13px;color:var(--gris);margin-top:8px;font-weight:300;">Propuesta de plantación para pared de hormigón del jardín · 3 alternativas de diseño</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:6px;">
+      <div class="gi" style="height:320px;grid-column:span 2;">
+        <img loading="lazy" decoding="async" src="img/08.jpg" alt="Vista anteproyecto pared de hormigón · San Benito">
+        <div class="gio"><span class="giolabel">Vista general · Pared de hormigón · Barrio San Benito</span></div>
+      </div>
+      <div class="gi" style="height:260px;">
+        <img loading="lazy" decoding="async" src="img/09.jpg" alt="Propuesta 1 · Strelitzia y gramíneas">
+        <div class="gio"><span class="giolabel">Propuesta 1 · Strelitzia + gramíneas rojizas</span></div>
+      </div>
+      <div class="gi" style="height:260px;">
+        <img loading="lazy" decoding="async" src="img/10.jpg" alt="Propuesta 2 · Strelitzia y flores blancas">
+        <div class="gio"><span class="giolabel">Propuesta 2 · Strelitzia + flores blancas</span></div>
+      </div>
+      <div class="gi" style="height:260px;grid-column:span 2;">
+        <img loading="lazy" decoding="async" src="img/11.jpg" alt="Propuesta 3 · Cipreses y lavanda">
+        <div class="gio"><span class="giolabel">Propuesta 3 · Cipreses + lavanda + flores blancas</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROYECTO 3: Jardín Tropical San Benito -->
+  <div style="margin-top:48px;">
+    <div style="text-align:center;margin-bottom:28px;">
+      <div class="stag" style="justify-content:center;margin-bottom:8px;">Proyecto · 2023</div>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--negro);">Jardín Tropical Interior <em style="font-style:italic;color:var(--verde-o);">· Barrio San Benito</em></h3>
+      <p style="font-size:13px;color:var(--gris);margin-top:8px;font-weight:300;">Diseño biofílico con vegetación tropical · bananeros, diefenbaquias, helechos y ficus · mulch orgánico</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:6px;">
+      <div class="gi" style="height:400px;grid-column:span 12;">
+        <img loading="lazy" decoding="async" src="img/12.jpg" alt="Vista panorámica · Jardín tropical · Barrio San Benito">
+        <div class="gio"><span class="giolabel">Vista panorámica · Jardín tropical · Barrio San Benito</span></div>
+      </div>
+      <div class="gi" style="height:280px;grid-column:span 7;">
+        <img loading="lazy" decoding="async" src="img/13.jpg" alt="Vista frontal · Diefenbaquias y Strelitzia">
+        <div class="gio"><span class="giolabel">Vista frontal · Diefenbaquias y Strelitzia</span></div>
+      </div>
+      <div class="gi" style="height:280px;grid-column:span 5;">
+        <img loading="lazy" decoding="async" src="img/14.jpg" alt="Vista aérea · Composición tropical">
+        <div class="gio"><span class="giolabel">Vista aérea · Composición tropical</span></div>
+      </div>
+      <div class="gi" style="height:260px;grid-column:span 6;">
+        <img loading="lazy" decoding="async" src="img/15.jpg" alt="Acceso · Bananero y helechos">
+        <div class="gio"><span class="giolabel">Acceso · Bananero y helechos</span></div>
+      </div>
+      <div class="gi" style="height:260px;grid-column:span 6;">
+        <img loading="lazy" decoding="async" src="img/16.jpg" alt="Detalle · Helechos y bananero">
+        <div class="gio"><span class="giolabel">Detalle · Helechos y bananero</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROYECTO 4: Jardín con estanque y jacarandás -->
+  <div style="margin-top:48px;">
+    <div style="text-align:center;margin-bottom:28px;">
+      <div class="stag" style="justify-content:center;margin-bottom:8px;">Proyecto · 2023</div>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--negro);">Jardín con Estanque <em style="font-style:italic;color:var(--verde-o);">· Barrio San Joaquín</em></h3>
+      <p style="font-size:13px;color:var(--gris);margin-top:8px;font-weight:300;">Diseño biofílico con estanque de nenúfares, jacarandás existentes e iluminación exterior de bajo consumo</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:6px;">
+      <div class="gi" style="height:320px;grid-column:span 2;">
+        <img loading="lazy" decoding="async" src="img/17.jpg" alt="Vista diurna · Jacarandás en flor">
+        <div class="gio"><span class="giolabel">Vista diurna · Jacarandás en flor</span></div>
+      </div>
+      <div class="gi" style="height:260px;">
+        <img loading="lazy" decoding="async" src="img/18.jpg" alt="Iluminación nocturna · Jacarandás">
+        <div class="gio"><span class="giolabel">Iluminación nocturna · Jacarandás</span></div>
+      </div>
+      <div class="gi" style="height:260px;">
+        <img loading="lazy" decoding="async" src="img/19.jpg" alt="Estanque · Nenúfares y Buda · Atardecer">
+        <div class="gio"><span class="giolabel">Estanque · Nenúfares y Buda · Atardecer</span></div>
+      </div>
+      <div class="gi" style="height:260px;grid-column:span 2;">
+        <img loading="lazy" decoding="async" src="img/20.jpg" alt="Estanque · Nenúfares y Buda · Noche">
+        <div class="gio"><span class="giolabel">Estanque · Nenúfares y Buda · Noche</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROYECTO 5: Jardín interior con senderos - San Joaquín -->
+  <div style="margin-top:48px;">
+    <div style="text-align:center;margin-bottom:28px;">
+      <div class="stag" style="justify-content:center;margin-bottom:8px;">Proyecto · 2023</div>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--negro);">Jardín Interior con Pared Verde <em style="font-style:italic;color:var(--verde-o);">· San Joaquín</em></h3>
+      <p style="font-size:13px;color:var(--gris);margin-top:8px;font-weight:300;">Distintas opciones de senderos y composición vegetal · losas rectangulares, circulares y hexagonales · pared verde con mulch volcánico</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:6px;">
+      <div class="gi" style="height:380px;grid-column:span 7;">
+        <img loading="lazy" decoding="async" src="img/21.jpg" alt="Sendero de losas · Vista inmersiva">
+        <div class="gio"><span class="giolabel">Sendero de losas · Vista inmersiva</span></div>
+      </div>
+      <div class="gi" style="height:380px;grid-column:span 5;">
+        <img loading="lazy" decoding="async" src="img/22.jpg" alt="Sendero hexagonal · Vista desde interior">
+        <div class="gio"><span class="giolabel">Sendero hexagonal · Vista desde interior</span></div>
+      </div>
+      <div class="gi" style="height:260px;grid-column:span 4;">
+        <img loading="lazy" decoding="async" src="img/23.jpg" alt="Vista aérea · Jardín vertical">
+        <div class="gio"><span class="giolabel">Vista aérea · Jardín vertical</span></div>
+      </div>
+      <div class="gi" style="height:260px;grid-column:span 4;">
+        <img loading="lazy" decoding="async" src="img/24.jpg" alt="Vista interior · Strelitzias y monstera">
+        <div class="gio"><span class="giolabel">Vista interior · Strelitzias y monstera</span></div>
+      </div>
+      <div class="gi" style="height:260px;grid-column:span 4;">
+        <img loading="lazy" decoding="async" src="img/25.jpg" alt="Sendero hexagonal · Vista lateral">
+        <div class="gio"><span class="giolabel">Sendero hexagonal · Vista lateral</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROYECTO 6: Jardín residencial con piscina y pergola -->
+  <div style="margin-top:48px;">
+    <div style="text-align:center;margin-bottom:28px;">
+      <div class="stag" style="justify-content:center;margin-bottom:8px;">Proyecto · 2021</div>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--negro);">Jardín Residencial con Piscina <em style="font-style:italic;color:var(--verde-o);">· La Plata</em></h3>
+      <p style="font-size:13px;color:var(--gris);margin-top:8px;font-weight:300;">Diseño completo con piscina, pergola con fogón, sendero de deck, flora nativa multiestacional · Verbena bonariensis, Phormium, Liriope, Dietes, Acer palmatum</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:6px;">
+      <div class="gi" style="height:400px;grid-column:span 12;">
+        <img loading="lazy" decoding="async" src="img/26.jpg" alt="Vista panorámica · Lavanda y girasoles · Atardecer">
+        <div class="gio"><span class="giolabel">Vista panorámica · Lavanda y girasoles · Atardecer</span></div>
+      </div>
+      <div class="gi" style="height:300px;grid-column:span 7;">
+        <img loading="lazy" decoding="async" src="img/27.jpg" alt="Piscina · Deck y reposeras · Atardecer">
+        <div class="gio"><span class="giolabel">Piscina · Deck y reposeras · Atardecer</span></div>
+      </div>
+      <div class="gi" style="height:300px;grid-column:span 5;">
+        <img loading="lazy" decoding="async" src="img/28.jpg" alt="Jardín · Piscina integrada · Vista lateral">
+        <div class="gio"><span class="giolabel">Jardín · Piscina integrada · Vista lateral</span></div>
+      </div>
+      <div class="gi" style="height:270px;grid-column:span 6;">
+        <img loading="lazy" decoding="async" src="img/29.jpg" alt="Noche · Pergola con fogón · Iluminación">
+        <div class="gio"><span class="giolabel">Noche · Pergola con fogón · Iluminación</span></div>
+      </div>
+      <div class="gi" style="height:270px;grid-column:span 6;">
+        <img loading="lazy" decoding="async" src="img/30.jpg" alt="Detalle · Pergola y sendero de deck">
+        <div class="gio"><span class="giolabel">Detalle · Pergola y sendero de deck</span></div>
+      </div>
+      <!-- Planos técnicos -->
+      <div class="gi" style="height:240px;grid-column:span 4;background:#f5f5f0;">
+        <img loading="lazy" decoding="async" src="img/31.jpg" alt="Plano de plantación · Distribución por sectores" style="object-fit:contain;background:#f9f9f6;">
+        <div class="gio"><span class="giolabel">Plano de plantación · Distribución por sectores</span></div>
+      </div>
+      <div class="gi" style="height:240px;grid-column:span 4;background:#f5f5f0;">
+        <img loading="lazy" decoding="async" src="img/32.jpg" alt="Plano técnico · Especies y medidas" style="object-fit:contain;background:#f9f9f6;">
+        <div class="gio"><span class="giolabel">Plano técnico · Especies y medidas</span></div>
+      </div>
+      <div class="gi" style="height:240px;grid-column:span 4;background:#f5f5f0;">
+        <img loading="lazy" decoding="async" src="img/33.jpg" alt="Fichas botánicas · Especies nativas utilizadas" style="object-fit:contain;background:#f9f9f6;">
+        <div class="gio"><span class="giolabel">Fichas botánicas · Especies nativas utilizadas</span></div>
+      </div>
+
+    <!-- Vistas adicionales proyecto Soledad -->
+    <div style="margin-top:6px;display:grid;grid-template-columns:repeat(12,1fr);gap:6px;">
+      <div class="gi" style="height:280px;grid-column:span 5;">
+        <img loading="lazy" decoding="async" src="img/34.jpg" alt="Vista piscina · Lavanda y sendero de losas">
+        <div class="gio"><span class="giolabel">Vista piscina · Lavanda y sendero de losas</span></div>
+      </div>
+      <div class="gi" style="height:280px;grid-column:span 7;">
+        <img loading="lazy" decoding="async" src="img/35.jpg" alt="Vista nocturna · Piscina aérea con iluminación">
+        <div class="gio"><span class="giolabel">Vista nocturna · Piscina aérea con iluminación</span></div>
+      </div>
+      <div class="gi" style="height:260px;grid-column:span 4;">
+        <img loading="lazy" decoding="async" src="img/36.jpg" alt="Vista nocturna · Jardín desde la casa">
+        <div class="gio"><span class="giolabel">Vista nocturna · Jardín desde la casa</span></div>
+      </div>
+      <div class="gi" style="height:260px;grid-column:span 4;">
+        <img loading="lazy" decoding="async" src="img/37.jpg" alt="Vista nocturna aérea · Planta iluminada">
+        <div class="gio"><span class="giolabel">Vista nocturna aérea · Planta iluminada</span></div>
+      </div>
+      <div class="gi" style="height:260px;grid-column:span 4;">
+        <img loading="lazy" decoding="async" src="img/38.jpg" alt="Vista lateral · Cantero curvo y piscina">
+        <div class="gio"><span class="giolabel">Vista lateral · Cantero curvo y piscina</span></div>
+      </div>
+      <div class="gi" style="height:300px;grid-column:span 12;">
+        <img loading="lazy" decoding="async" src="img/39.jpg" alt="Cantero fondo piscina · Strelitzia y monstera">
+        <div class="gio"><span class="giolabel">Cantero fondo piscina · Strelitzia y monstera</span></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- PROYECTO 7: Espacio Fogón - Renders y Realidad -->
+  <div style="margin-top:48px;">
+    <div style="text-align:center;margin-bottom:28px;">
+      <div class="stag" style="justify-content:center;margin-bottom:8px;">Proyecto · 2025 · Ejecutado</div>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--negro);">Espacio Fogón <em style="font-style:italic;color:var(--verde-o);">· De la propuesta a la realidad</em></h3>
+      <p style="font-size:13px;color:var(--gris);margin-top:8px;font-weight:300;">Diseño y ejecución de espacio de reunión con fogón · gravilla volcánica · contenedor circular de plantas · bordes de madera · sendero de durmientes · La Plata</p>
+    </div>
+
+    <!-- RENDERS -->
+    <div style="margin-bottom:6px;">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:300;color:var(--textos);letter-spacing:3px;text-transform:uppercase;text-align:center;padding:12px 0;border-top:1px solid var(--cremao);border-bottom:1px solid var(--cremao);margin-bottom:6px;">
+        Propuesta
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:6px;">
+        <div class="gi" style="height:360px;grid-column:span 7;">
+          <img loading="lazy" decoding="async" src="img/40.jpg" alt="Render · Vista frontal diurna">
+          <div class="gio"><span class="giolabel">Render · Vista frontal diurna</span></div>
+        </div>
+        <div class="gi" style="height:360px;grid-column:span 5;">
+          <img loading="lazy" decoding="async" src="img/41.jpg" alt="Render · Vista nocturna · Fogón encendido">
+          <div class="gio"><span class="giolabel">Render · Vista nocturna · Fogón encendido</span></div>
+        </div>
+        <div class="gi" style="height:280px;grid-column:span 5;">
+          <img loading="lazy" decoding="async" src="img/42.jpg" alt="Render · Vista aérea">
+          <div class="gio"><span class="giolabel">Render · Vista aérea</span></div>
+        </div>
+        <div class="gi" style="height:280px;grid-column:span 7;">
+          <img loading="lazy" decoding="async" src="img/43.jpg" alt="Render · Propuesta final">
+          <div class="gio"><span class="giolabel">Render · Propuesta final</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESULTADO REAL -->
+    <div style="margin-top:6px;">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:300;color:var(--verde-o);letter-spacing:3px;text-transform:uppercase;text-align:center;padding:12px 0;border-top:1px solid var(--cremao);border-bottom:1px solid var(--cremao);margin-bottom:6px;display:flex;align-items:center;justify-content:center;gap:12px;">
+        <span style="display:inline-block;width:8px;height:8px;background:var(--verde);border-radius:50%;"></span>
+        Resultado ejecutado
+        <span style="display:inline-block;width:8px;height:8px;background:var(--verde);border-radius:50%;"></span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;">
+        <div class="gi" style="height:300px;">
+          <img loading="lazy" decoding="async" src="img/44.jpg" alt="Resultado real · Vista diurna">
+          <div class="gio"><span class="giolabel">Resultado real · Vista diurna</span></div>
+        </div>
+        <div class="gi" style="height:300px;">
+          <img loading="lazy" decoding="async" src="img/45.jpg" alt="Resultado real · Noche encendido">
+          <div class="gio"><span class="giolabel">Resultado real · Noche encendido</span></div>
+        </div>
+        <div class="gi" style="height:300px;">
+          <img loading="lazy" decoding="async" src="img/46.jpg" alt="Resultado real · Foto del cliente">
+          <div class="gio"><span class="giolabel">Resultado real · Foto del cliente</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROYECTO 8: Jardín con piscina mediterráneo-tropical -->
+  <div style="margin-top:48px;">
+    <div style="text-align:center;margin-bottom:28px;">
+      <div class="stag" style="justify-content:center;margin-bottom:8px;">Proyecto · 2023</div>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--negro);">Jardín con Piscina <em style="font-style:italic;color:var(--verde-o);">· Flora Mediterránea y Tropical</em></h3>
+      <p style="font-size:13px;color:var(--gris);margin-top:8px;font-weight:300;">Diseño residencial con piscina · deck de madera · lavanda · salvia · palmeras · monstera · strelitzia · setos de hiedra · iluminación con esferas</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:6px;">
+      <div class="gi" style="height:420px;grid-column:span 12;">
+        <img loading="lazy" decoding="async" src="img/47.jpg" alt="Vista panorámica · Piscina y flora mediterránea · Atardecer">
+        <div class="gio"><span class="giolabel">Vista panorámica · Piscina y flora mediterránea · Atardecer</span></div>
+      </div>
+      <div class="gi" style="height:300px;grid-column:span 5;">
+        <img loading="lazy" decoding="async" src="img/48.jpg" alt="Vista tropical · Monstera y palmeras · Piscina">
+        <div class="gio"><span class="giolabel">Vista tropical · Monstera y palmeras · Piscina</span></div>
+      </div>
+      <div class="gi" style="height:300px;grid-column:span 4;">
+        <img loading="lazy" decoding="async" src="img/49.jpg" alt="Vista nocturna · Deck · Luces esfera">
+        <div class="gio"><span class="giolabel">Vista nocturna · Deck · Luces esfera</span></div>
+      </div>
+      <div class="gi" style="height:300px;grid-column:span 3;">
+        <img loading="lazy" decoding="async" src="img/50.jpg" alt="Vista nocturna · Lavanda y salvia · Piscina">
+        <div class="gio"><span class="giolabel">Vista nocturna · Lavanda y salvia · Piscina</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROYECTO 9: Restaurante PIBÄ - Espacio Corporativo -->
+  <div style="margin-top:48px;">
+    <div style="text-align:center;margin-bottom:28px;">
+      <div class="stag" style="justify-content:center;margin-bottom:8px;">Proyecto Corporativo · 2019 · Ejecutado</div>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--negro);">Restaurante -PIBÄ- <em style="font-style:italic;color:var(--verde-o);">· Fachada Verde · La Plata</em></h3>
+      <p style="font-size:13px;color:var(--gris);margin-top:8px;font-weight:300;">Diseño e instalación de jardín vertical y hiedra trepadora en fachada comercial · techo verde · maceteros de acceso · centro de La Plata</p>
+    </div>
+
+    <!-- ANTES -->
+    <div style="margin-bottom:6px;">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:300;color:var(--textos);letter-spacing:3px;text-transform:uppercase;text-align:center;padding:10px 0;border-top:1px solid var(--cremao);border-bottom:1px solid var(--cremao);margin-bottom:6px;">
+        Antes
+      </div>
+      <div class="gi" style="height:340px;">
+        <img loading="lazy" decoding="async" src="img/51.jpg" alt="Antes · Fachada sin vegetación">
+        <div class="gio"><span class="giolabel">Antes · Fachada sin vegetación</span></div>
+      </div>
+    </div>
+
+    <!-- DURANTE -->
+    <div style="margin-bottom:6px;">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:300;color:var(--textos);letter-spacing:3px;text-transform:uppercase;text-align:center;padding:10px 0;border-top:1px solid var(--cremao);border-bottom:1px solid var(--cremao);margin-bottom:6px;">
+        Durante
+      </div>
+      <div class="gi" style="height:340px;">
+        <img loading="lazy" decoding="async" src="img/52.jpg" alt="Durante · Instalación de hiedra trepadora">
+        <div class="gio"><span class="giolabel">Durante · Instalación de hiedra trepadora</span></div>
+      </div>
+    </div>
+
+    <!-- RESULTADO -->
+    <div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:300;color:var(--verde-o);letter-spacing:3px;text-transform:uppercase;text-align:center;padding:10px 0;border-top:1px solid var(--cremao);border-bottom:1px solid var(--cremao);margin-bottom:6px;display:flex;align-items:center;justify-content:center;gap:12px;">
+        <span style="display:inline-block;width:8px;height:8px;background:var(--verde);border-radius:50%;"></span>
+        Resultado ejecutado
+        <span style="display:inline-block;width:8px;height:8px;background:var(--verde);border-radius:50%;"></span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:6px;">
+        <div class="gi" style="height:360px;grid-column:span 7;">
+          <img loading="lazy" decoding="async" src="img/53.jpg" alt="Resultado · Vista exterior completa · -PIBÄ-">
+          <div class="gio"><span class="giolabel">Resultado · Vista exterior completa · -PIBÄ-</span></div>
+        </div>
+        <div class="gi" style="height:360px;grid-column:span 5;">
+          <img loading="lazy" decoding="async" src="img/54.jpg" alt="Resultado · Vista nocturna · Luces y hiedra">
+          <div class="gio"><span class="giolabel">Resultado · Vista nocturna · Luces y hiedra</span></div>
+        </div>
+        <div class="gi" style="height:280px;grid-column:span 4;">
+          <img loading="lazy" decoding="async" src="img/55.jpg" alt="Resultado · Fachada con hiedra · Vista lateral">
+          <div class="gio"><span class="giolabel">Resultado · Fachada con hiedra · Vista lateral</span></div>
+        </div>
+        <div class="gi" style="height:280px;grid-column:span 4;">
+          <img loading="lazy" decoding="async" src="img/56.jpg" alt="Resultado · Detalle jardín vertical en columna">
+          <div class="gio"><span class="giolabel">Resultado · Detalle jardín vertical en columna</span></div>
+        </div>
+        <div class="gi" style="height:280px;grid-column:span 4;">
+          <img loading="lazy" decoding="async" src="img/57.jpg" alt="Resultado · Techo verde con enredadera">
+          <div class="gio"><span class="giolabel">Resultado · Techo verde con enredadera</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- foto extra como destacada debajo -->
+  <div style="margin-top:6px;">
+    <div class="gi" style="height:380px;">
+      <img loading="lazy" decoding="async" src="img/58.jpg" alt="Jardín interno · perspectiva completa">
+      <div class="gio"><span class="giolabel">Jardín interno · perspectiva completa · La Plata</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE NOSOTROS -->
+<section class="sobre" id="sobre">
+  <div class="simgs rv">
+    <img loading="lazy" decoding="async" class="simg1" src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?w=700&q=80" alt="Lautaro Parente paisajista La Plata">
+    <img loading="lazy" decoding="async" class="simg2" src="https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?w=500&q=80" alt="Trabajo de campo Estudio P">
+    <div class="sdeco">
+      <svg viewBox="0 0 340 115" xmlns="http://www.w3.org/2000/svg" style="width:70px;"><ellipse cx="105" cy="26" rx="92" ry="22" fill="#7aba4c" transform="rotate(-7,105,26)"/><ellipse cx="245" cy="86" rx="46" ry="14" fill="#7aba4c" transform="rotate(-5,245,86)"/></svg>
+    </div>
+  </div>
+  <div class="stxt rv d2">
+    <div class="stag">Sobre nosotros</div>
+    <h2 class="big">Somos <em>Estudio P</em>, y vivimos el paisajismo</h2>
+    <p class="body-p">Estudio P Paisajismo nació en La Plata con una convicción: cada espacio exterior merece ser pensado con la misma atención que el interior de una casa.</p>
+    <p class="body-p">Lautaro Parente, paisajista platense, lidera cada proyecto de manera personal, combinando formación técnica con sensibilidad estética y amor por la flora local.</p>
+    <p class="body-p">Trabajamos en toda la región —La Plata, Berisso, Ensenada, Gonnet, City Bell— con un enfoque artesanal y comprometido con el medioambiente.</p>
+    <div class="sfirma">
+      <div class="favatar">LP</div>
+      <div class="finfo">
+        <strong>Lautaro Parente</strong>
+        <span>Paisajista · Fundador · La Plata</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESO -->
+<section class="proceso" id="proceso">
+  <div class="proch rv">
+    <div class="stag" style="justify-content:center;">Cómo trabajamos</div>
+    <h2 class="big">Un proceso <em>claro y transparente</em></h2>
+  </div>
+  <div class="procgrid">
+    <div class="pstep rv d1">
+      <div class="pnum">01</div>
+      <h3>Consulta inicial</h3>
+      <p>Nos reunimos para escuchar tus ideas, analizar el espacio y entender tu estilo de vida y presupuesto.</p>
+    </div>
+    <div class="pstep rv d2">
+      <div class="pnum">02</div>
+      <h3>Diseño & propuesta</h3>
+      <p>Elaboramos un plano detallado con selección de plantas, materiales y visualización del resultado final.</p>
+    </div>
+    <div class="pstep rv d3">
+      <div class="pnum">03</div>
+      <h3>Ejecución</h3>
+      <p>Llevamos el diseño a la realidad con materiales de calidad y el equipo de Estudio P supervisando cada detalle.</p>
+    </div>
+    <div class="pstep rv d4">
+      <div class="pnum">04</div>
+      <h3>Seguimiento</h3>
+      <p>Acompañamos el crecimiento de tu jardín con planes de mantenimiento y asesoría continua post-obra.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section class="contacto" id="contacto">
+  <div class="cin">
+    <div class="cleft rv">
+      <div class="stag" style="color:var(--verde);">Hablemos</div>
+      <h2>¿Tenés un <em>espacio para transformar</em>?</h2>
+      <p>Contanos tu proyecto. Atendemos consultas en La Plata, Berisso, Ensenada, Gonnet, City Bell y toda la región.</p>
+      <div class="cinfo">
+        <div class="citem">
+          <span class="cico">📍</span>
+          <div>
+            <strong>Ubicación</strong>
+            <span>La Plata, Buenos Aires, Argentina</span>
+          </div>
+        </div>
+        <div class="citem">
+          <span class="cico">📱</span>
+          <div>
+            <strong>WhatsApp</strong>
+            <span>+54 9 221 XXX-XXXX</span>
+          </div>
+        </div>
+        <div class="citem">
+          <span class="cico">✉️</span>
+          <div>
+            <strong>Email</strong>
+            <span>contacto@estudiopaisajismo.com.ar</span>
+          </div>
+        </div>
+        <div class="citem">
+          <span class="cico">🕐</span>
+          <div>
+            <strong>Horario de atención</strong>
+            <span>Lunes a Viernes · 9 a 18 hs</span>
+          </div>
+        </div>
+      </div>
+      <div class="csocial">
+        <a href="https://www.instagram.com/estudiop_paisajismo/" target="_blank" class="csoc">📷 Instagram</a>
+        <a href="https://wa.me/5492210000000" target="_blank" class="csoc">💬 WhatsApp</a>
+      </div>
+    </div>
+    <div class="cform rv d2">
+      <div class="frow">
+        <div class="fg">
+          <label>Nombre</label>
+          <input type="text" placeholder="Tu nombre">
+        </div>
+        <div class="fg">
+          <label>Teléfono</label>
+          <input type="tel" placeholder="Tu teléfono">
+        </div>
+      </div>
+      <div class="fg">
+        <label>Email</label>
+        <input type="email" placeholder="tu@email.com">
+      </div>
+      <div class="fg">
+        <label>Tipo de proyecto</label>
+        <select>
+          <option value="" disabled selected>Seleccioná una opción</option>
+          <option>Jardín residencial</option>
+          <option>Terraza o balcón</option>
+          <option>Espacio corporativo</option>
+          <option>Jardín vertical</option>
+          <option>Mantenimiento</option>
+          <option>Iluminación y riego</option>
+          <option>Otro</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label>Contanos tu proyecto</label>
+        <textarea placeholder="Describí brevemente el espacio y qué te gustaría lograr..."></textarea>
+      </div>
+      <button class="btn" onclick="alert('¡Gracias! Nos ponemos en contacto pronto. 🌿')">
+        Enviar consulta &nbsp;→
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="flogo"><img loading="lazy" decoding="async" src="img/59.jpg" alt="Estudio P Paisajismo" style="height:42px;width:auto;display:block;filter:brightness(0) invert(1);opacity:0.55;"></div>
+  <p class="fcopy">© 2025 Estudio P Paisajismo · Lautaro Parente · La Plata, Buenos Aires</p>
+  <ul class="flinks">
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#galeria">Proyectos</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+    <li><a href="https://www.instagram.com/estudiop_paisajismo/" target="_blank">Instagram</a></li>
+  </ul>
+</footer>
+
+<script>
+// Cursor
+const cur = document.getElementById('cur');
+const ring = document.getElementById('curring');
+document.addEventListener('mousemove', e => {
+  cur.style.left = e.clientX + 'px';
+  cur.style.top = e.clientY + 'px';
+  setTimeout(() => {
+    ring.style.left = e.clientX + 'px';
+    ring.style.top = e.clientY + 'px';
+  }, 80);
+});
+
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('s', window.scrollY > 60);
+});
+
+// Reveal on scroll
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('on'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

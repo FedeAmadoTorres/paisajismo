@@ -114,19 +114,36 @@ h2.big em{font-style:italic;color:var(--verde-o);}
 .gh h2{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,4vw,52px);font-weight:300;color:var(--negro);margin-bottom:12px;}
 .gh h2 em{font-style:italic;color:var(--verde-o);}
 .gh p{font-size:14px;font-weight:300;color:var(--gris);max-width:460px;margin:0 auto;line-height:1.8;}
-.ggrid{display:grid;grid-template-columns:repeat(12,1fr);gap:6px;}
+/* sistema de grilla de proyectos: 6 columnas, alto por proporción */
+.pblock{margin-top:76px;}
+.pblock:first-of-type{margin-top:0;}
+.phead{text-align:center;max-width:660px;margin:0 auto 26px;}
+.phead h3{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--negro);line-height:1.25;}
+.phead p{font-size:13px;color:var(--gris);margin-top:8px;font-weight:300;line-height:1.7;}
+.pgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;}
 .gi{overflow:hidden;position:relative;background:#c8d8b8;}
 .gi img{width:100%;height:100%;object-fit:cover;transition:transform .7s ease;display:block;}
 .gi:hover img{transform:scale(1.06);}
+.c6{grid-column:span 6;aspect-ratio:16/9;}
+.c3{grid-column:span 3;aspect-ratio:3/2;}
+.c2{grid-column:span 2;aspect-ratio:4/3;}
 .gio{position:absolute;inset:0;background:linear-gradient(to top,rgba(30,50,15,.75) 0%,transparent 55%);opacity:0;transition:opacity .4s;display:flex;align-items:flex-end;padding:18px;}
 .gi:hover .gio{opacity:1;}
 .giolabel{font-family:'Cormorant Garamond',serif;font-size:15px;color:#fff;font-weight:300;}
-.gi1{grid-column:span 7;grid-row:span 2;height:460px;}
-.gi2{grid-column:span 5;height:227px;}
-.gi3{grid-column:span 5;height:227px;}
-.gi4{grid-column:span 4;height:228px;}
-.gi5{grid-column:span 4;height:228px;}
-.gi6{grid-column:span 4;height:228px;}
+
+/* visor de imagen ampliada */
+.lb{position:fixed;inset:0;background:rgba(12,18,8,.96);z-index:9000;display:none;
+  align-items:center;justify-content:center;}
+.lb.open{display:flex;}
+.lb img{max-width:92vw;max-height:80vh;object-fit:contain;display:block;}
+.lbcap{position:absolute;bottom:26px;left:0;right:0;text-align:center;
+  font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:300;color:rgba(255,255,255,.7);padding:0 20px;}
+.lbx,.lbnav{position:absolute;background:none;border:none;color:rgba(255,255,255,.55);
+  cursor:pointer;transition:color .25s;line-height:1;padding:10px;}
+.lbx:hover,.lbnav:hover{color:#fff;}
+.lbx{top:20px;right:24px;font-size:26px;}
+.lbnav{top:50%;transform:translateY(-50%);font-size:50px;}
+.lbprev{left:14px;} .lbnext{right:14px;}
 
 /* SOBRE */
 .sobre{padding:110px 64px;background:#fff;display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center;}
@@ -194,6 +211,133 @@ footer{background:#111;padding:32px 64px;display:flex;justify-content:space-betw
 .rv{opacity:0;transform:translateY(34px);transition:opacity .8s ease,transform .8s ease;}
 .rv.on{opacity:1;transform:translateY(0);}
 .d1{transition-delay:.1s;}.d2{transition-delay:.2s;}.d3{transition-delay:.3s;}.d4{transition-delay:.4s;}
+
+
+/* =================================================================
+   RESPONSIVE  ·  agregado 2026
+   ================================================================= */
+
+.nburger{display:none;background:none;border:none;font-size:23px;line-height:1;
+  color:#fff;padding:4px 2px;position:relative;z-index:101;cursor:pointer;}
+nav.s .nburger{color:var(--negro);}
+nav.open .nburger{color:var(--negro);}
+
+/* ---------- TABLET ---------- */
+@media (max-width:1100px){
+  nav{padding:20px 36px;} nav.s{padding:12px 36px;}
+  .nlinks{gap:24px;} .nlinks a{font-size:11px;letter-spacing:1.5px;}
+  .hcontent{padding:0 36px 80px;}
+  .hscroll{right:36px;}
+  .hlogo-deco{right:36px;} .hlogo-deco img{height:120px;}
+  .intro,.sobre{padding:80px 36px;gap:50px;}
+  .servicios,.galeria,.proceso,.contacto{padding:80px 36px;}
+  .sgrid{grid-template-columns:repeat(2,1fr);}
+  .c3{aspect-ratio:16/10;} .c2{aspect-ratio:1/1;}
+  .cin{gap:50px;}
+  footer{padding:28px 36px;}
+}
+
+/* ---------- MÓVIL ---------- */
+@media (max-width:860px){
+
+  /* nav + menú desplegable */
+  nav{padding:14px 20px;} nav.s{padding:10px 20px;}
+  nav .nlogo img{height:40px !important;}
+  .nburger{display:block;}
+  .nlinks{position:fixed;inset:0;background:rgba(255,255,255,.985);
+    flex-direction:column;justify-content:center;align-items:center;gap:28px;
+    transform:translateX(100%);transition:transform .35s ease;z-index:99;}
+  nav.open .nlinks{transform:translateX(0);}
+  .nlinks a,nav.s .nlinks a{color:var(--negro) !important;font-size:15px;letter-spacing:3px;}
+
+  /* hero */
+  .hero{height:100vh;height:100svh;padding-top:60px;}
+  .hcontent{padding:0 20px 60px;max-width:100%;}
+  .htitle{font-size:40px !important;margin-bottom:18px;}
+  .hdesc{font-size:14px;line-height:1.75;margin-bottom:30px;max-width:100%;}
+  .htag{font-size:9px;letter-spacing:2.5px;margin-bottom:14px;}
+  .htag::before{width:22px;}
+  .hcta{padding:14px 26px;font-size:9px;}
+  .hlogo-deco,.hscroll{display:none;}
+
+  /* marquee */
+  .marq{height:56px;} .marq-item{font-size:11px;padding:0 18px;gap:18px;}
+
+  /* intro */
+  .intro{padding:64px 20px;grid-template-columns:1fr;gap:44px;}
+  h2.big{font-size:30px !important;margin-bottom:18px;}
+  .body-p{font-size:14px;line-height:1.85;}
+  .istats{gap:16px;margin-top:30px;}
+  .snum{font-size:30px;} .slabel{font-size:10px;}
+  .iimgs{height:330px;}
+  .ibadge{right:0;width:88px;padding:12px 10px;}
+  .ibadge img{width:60px;}
+
+  /* servicios */
+  .servicios{padding:64px 20px;}
+  .sh{flex-direction:column;align-items:flex-start;gap:16px;margin-bottom:36px;}
+  .sh h2{font-size:30px !important;} .sh p{max-width:100%;font-size:13px;}
+  .sgrid{grid-template-columns:1fr;gap:1px;}
+  .scard{padding:32px 22px;}
+  .snum2{font-size:36px;margin-bottom:12px;}
+
+  /* galería */
+  .galeria{padding:64px 14px;}
+  .gh{margin-bottom:36px;} .gh h2{font-size:30px !important;} .gh p{font-size:13px;}
+  .pgrid{grid-template-columns:repeat(2,1fr);gap:5px;}
+  .c6{grid-column:span 2;aspect-ratio:16/10;}
+  .c3{grid-column:span 2;aspect-ratio:3/2;}
+  .c2{grid-column:span 1;aspect-ratio:1/1;}
+  .pblock{margin-top:52px;}
+  .phead{margin-bottom:20px;} .phead h3{font-size:22px;} .phead p{font-size:12px;}
+  .gio{opacity:1;padding:12px;
+    background:linear-gradient(to top,rgba(30,50,15,.8) 0%,transparent 60%);}
+  .giolabel{font-size:12px;}
+  .lbnav{font-size:34px;} .lbx{top:14px;right:16px;}
+  .lb img{max-width:96vw;max-height:74vh;}
+
+  /* sobre */
+  .sobre{padding:64px 20px;grid-template-columns:1fr;gap:44px;}
+  .simgs{height:340px;}
+  .sdeco{width:72px;height:72px;} .sdeco img{width:44px;}
+  .stxt h2{font-size:30px !important;} .stxt p{font-size:14px;}
+
+  /* proceso */
+  .proceso{padding:64px 20px;}
+  .proch{margin-bottom:36px;} .proch h2{font-size:30px !important;}
+  .procgrid{grid-template-columns:repeat(2,1fr);gap:32px 14px;}
+  .procgrid::before{display:none;}
+  .pstep{padding:0;}
+  .pnum{width:52px;height:52px;font-size:19px;margin-bottom:14px;}
+  .pstep h3{font-size:17px;} .pstep p{font-size:12.5px;}
+
+  /* contacto */
+  .contacto{padding:64px 20px;}
+  .cin{grid-template-columns:1fr;gap:44px;}
+  .cleft h2{font-size:30px !important;}
+  .cleft > p{margin-bottom:28px;}
+  .frow{grid-template-columns:1fr;}
+  .fg input,.fg textarea,.fg select{font-size:16px;}  /* evita el zoom automático de iOS */
+  .csocial{flex-wrap:wrap;}
+
+  /* footer */
+  footer{flex-direction:column;gap:18px;text-align:center;padding:30px 20px;}
+  .flinks{flex-wrap:wrap;justify-content:center;gap:16px;}
+}
+
+@media (max-width:380px){
+  .htitle{font-size:34px !important;}
+  .c2{aspect-ratio:4/5;} .c6{aspect-ratio:4/3;}
+  .istats{grid-template-columns:1fr;}
+}
+
+/* En pantallas táctiles: sin cursor custom (quedaban dos puntos verdes
+   pegados en la esquina) y sin efectos dependientes de :hover */
+@media (hover:none){
+  #cur,#curring{display:none !important;}
+  body,a,.btn,button{cursor:auto;}
+  .btn{cursor:pointer;}
+}
 </style>
 </head>
 <body>
@@ -204,7 +348,8 @@ footer{background:#111;padding:32px 64px;display:flex;justify-content:space-betw
 <!-- NAV -->
 <nav id="nav">
   <a href="#inicio" class="nlogo"><img src="img/01.jpg" alt="Estudio P Paisajismo" style="height:54px;width:auto;display:block;"></a>
-  <ul class="nlinks">
+  <button class="nburger" id="nburger" aria-label="Abrir menú" aria-expanded="false">&#9776;</button>
+  <ul class="nlinks" id="nlinks">
     <li><a href="#servicios">Servicios</a></li>
     <li><a href="#galeria">Proyectos</a></li>
     <li><a href="#sobre">Nosotros</a></li>
@@ -336,379 +481,251 @@ footer{background:#111;padding:32px 64px;display:flex;justify-content:space-betw
   <div class="gh rv">
     <div class="stag" style="justify-content:center;">Nuestros proyectos</div>
     <h2 class="big">Cada espacio, <em>una historia</em></h2>
-    <p>Proyectos de paisajismo en La Plata y Barrio San Benito. Jardines que integran biofilia, especies nativas y diseño contemporáneo.</p>
+    <p>Proyectos de paisajismo en La Plata y alrededores. Jardines que integran biofilia, especies nativas y diseño contemporáneo.</p>
   </div>
-  <div class="ggrid rv">
-    <div class="gi gi1">
-      <img loading="lazy" decoding="async" src="img/02.jpg" alt="Jardín interior · árbol otoñal">
-      <div class="gio"><span class="giolabel">Jardín interior · árbol otoñal</span></div>
+  <div class="pblock rv">
+    <div class="phead">
+      <div class="stag" style="justify-content:center;margin-bottom:8px;">Proyecto</div>
+      <h3>Jardín Interno<em style="font-style:italic;color:var(--verde-o);">· La Plata</em></h3>
+      <p>Patio interior con arce de hoja roja, gramíneas y gravilla · integración entre hormigón visto y vegetación</p>
     </div>
-    <div class="gi gi2">
-      <img loading="lazy" decoding="async" src="img/03.jpg" alt="Jardín interno · vista nocturna">
-      <div class="gio"><span class="giolabel">Jardín interno · atardecer</span></div>
-    </div>
-    <div class="gi gi3">
-      <img loading="lazy" decoding="async" src="img/04.jpg" alt="Jardín interno · vista lateral">
-      <div class="gio"><span class="giolabel">Jardín interno · vista lateral</span></div>
-    </div>
-    <div class="gi gi4">
-      <img loading="lazy" decoding="async" src="img/05.jpg" alt="Jardín interno · vista exterior">
-      <div class="gio"><span class="giolabel">Vista exterior · acceso</span></div>
-    </div>
-    <div class="gi gi5">
-      <img loading="lazy" decoding="async" src="img/06.jpg" alt="Jardín interno · luz natural">
-      <div class="gio"><span class="giolabel">Jardín interno · luz natural</span></div>
-    </div>
-    <div class="gi gi6">
-      <img loading="lazy" decoding="async" src="img/07.jpg" alt="Jardín interno · vista pasillo">
-      <div class="gio"><span class="giolabel">Vista pasillo · gramíneas</span></div>
-    </div>
-  </div>
-
-  <!-- PROYECTO 2: Barrio San Benito -->
-  <div style="margin-top:48px;">
-    <div style="text-align:center;margin-bottom:28px;">
-      <div class="stag" style="justify-content:center;margin-bottom:8px;">Proyecto · 2023</div>
-      <h3 style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--negro);">Vivienda Mariana y Fernando <em style="font-style:italic;color:var(--verde-o);">· Barrio San Benito</em></h3>
-      <p style="font-size:13px;color:var(--gris);margin-top:8px;font-weight:300;">Propuesta de plantación para pared de hormigón del jardín · 3 alternativas de diseño</p>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:6px;">
-      <div class="gi" style="height:320px;grid-column:span 2;">
-        <img loading="lazy" decoding="async" src="img/08.jpg" alt="Vista anteproyecto pared de hormigón · San Benito">
-        <div class="gio"><span class="giolabel">Vista general · Pared de hormigón · Barrio San Benito</span></div>
+    <div class="pgrid">
+      <div class="gi c6" data-cap="Jardín interior · árbol otoñal">
+        <img loading="lazy" decoding="async" src="img/02.jpg" alt="Jardín interior · árbol otoñal">
+        <div class="gio"><span class="giolabel">Jardín interior · árbol otoñal</span></div>
       </div>
-      <div class="gi" style="height:260px;">
-        <img loading="lazy" decoding="async" src="img/09.jpg" alt="Propuesta 1 · Strelitzia y gramíneas">
+      <div class="gi c2" data-cap="Jardín interno · luz natural">
+        <img loading="lazy" decoding="async" src="img/06.jpg" alt="Jardín interno · luz natural">
+        <div class="gio"><span class="giolabel">Jardín interno · luz natural</span></div>
+      </div>
+      <div class="gi c2" data-cap="Jardín interno · atardecer">
+        <img loading="lazy" decoding="async" src="img/03.jpg" alt="Jardín interno · atardecer">
+        <div class="gio"><span class="giolabel">Jardín interno · atardecer</span></div>
+      </div>
+      <div class="gi c2" data-cap="Jardín interno · perspectiva completa">
+        <img loading="lazy" decoding="async" src="img/58.jpg" alt="Jardín interno · perspectiva completa">
+        <div class="gio"><span class="giolabel">Jardín interno · perspectiva completa</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="pblock rv">
+    <div class="phead">
+      <div class="stag" style="justify-content:center;margin-bottom:8px;">Proyecto · 2023</div>
+      <h3>Vivienda Mariana y Fernando<em style="font-style:italic;color:var(--verde-o);">· Barrio San Benito</em></h3>
+      <p>Propuesta de plantación para pared de hormigón del jardín · 3 alternativas de diseño</p>
+    </div>
+    <div class="pgrid">
+      <div class="gi c6" data-cap="Propuesta 1 · Strelitzia + gramíneas rojizas">
+        <img loading="lazy" decoding="async" src="img/09.jpg" alt="Propuesta 1 · Strelitzia + gramíneas rojizas">
         <div class="gio"><span class="giolabel">Propuesta 1 · Strelitzia + gramíneas rojizas</span></div>
       </div>
-      <div class="gi" style="height:260px;">
-        <img loading="lazy" decoding="async" src="img/10.jpg" alt="Propuesta 2 · Strelitzia y flores blancas">
+      <div class="gi c3" data-cap="Propuesta 2 · Strelitzia + flores blancas">
+        <img loading="lazy" decoding="async" src="img/10.jpg" alt="Propuesta 2 · Strelitzia + flores blancas">
         <div class="gio"><span class="giolabel">Propuesta 2 · Strelitzia + flores blancas</span></div>
       </div>
-      <div class="gi" style="height:260px;grid-column:span 2;">
-        <img loading="lazy" decoding="async" src="img/11.jpg" alt="Propuesta 3 · Cipreses y lavanda">
+      <div class="gi c3" data-cap="Propuesta 3 · Cipreses + lavanda + flores blancas">
+        <img loading="lazy" decoding="async" src="img/11.jpg" alt="Propuesta 3 · Cipreses + lavanda + flores blancas">
         <div class="gio"><span class="giolabel">Propuesta 3 · Cipreses + lavanda + flores blancas</span></div>
       </div>
     </div>
   </div>
-
-  <!-- PROYECTO 3: Jardín Tropical San Benito -->
-  <div style="margin-top:48px;">
-    <div style="text-align:center;margin-bottom:28px;">
+  <div class="pblock rv">
+    <div class="phead">
       <div class="stag" style="justify-content:center;margin-bottom:8px;">Proyecto · 2023</div>
-      <h3 style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--negro);">Jardín Tropical Interior <em style="font-style:italic;color:var(--verde-o);">· Barrio San Benito</em></h3>
-      <p style="font-size:13px;color:var(--gris);margin-top:8px;font-weight:300;">Diseño biofílico con vegetación tropical · bananeros, diefenbaquias, helechos y ficus · mulch orgánico</p>
+      <h3>Jardín Tropical Interior<em style="font-style:italic;color:var(--verde-o);">· Barrio San Benito</em></h3>
+      <p>Diseño biofílico con vegetación tropical · bananeros, diefenbaquias, helechos y ficus · mulch orgánico</p>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:6px;">
-      <div class="gi" style="height:400px;grid-column:span 12;">
-        <img loading="lazy" decoding="async" src="img/12.jpg" alt="Vista panorámica · Jardín tropical · Barrio San Benito">
-        <div class="gio"><span class="giolabel">Vista panorámica · Jardín tropical · Barrio San Benito</span></div>
+    <div class="pgrid">
+      <div class="gi c6" data-cap="Vista panorámica · Jardín tropical">
+        <img loading="lazy" decoding="async" src="img/12.jpg" alt="Vista panorámica · Jardín tropical">
+        <div class="gio"><span class="giolabel">Vista panorámica · Jardín tropical</span></div>
       </div>
-      <div class="gi" style="height:280px;grid-column:span 7;">
+      <div class="gi c2" data-cap="Vista frontal · Diefenbaquias y Strelitzia">
         <img loading="lazy" decoding="async" src="img/13.jpg" alt="Vista frontal · Diefenbaquias y Strelitzia">
         <div class="gio"><span class="giolabel">Vista frontal · Diefenbaquias y Strelitzia</span></div>
       </div>
-      <div class="gi" style="height:280px;grid-column:span 5;">
-        <img loading="lazy" decoding="async" src="img/14.jpg" alt="Vista aérea · Composición tropical">
-        <div class="gio"><span class="giolabel">Vista aérea · Composición tropical</span></div>
-      </div>
-      <div class="gi" style="height:260px;grid-column:span 6;">
+      <div class="gi c2" data-cap="Acceso · Bananero y helechos">
         <img loading="lazy" decoding="async" src="img/15.jpg" alt="Acceso · Bananero y helechos">
         <div class="gio"><span class="giolabel">Acceso · Bananero y helechos</span></div>
       </div>
-      <div class="gi" style="height:260px;grid-column:span 6;">
+      <div class="gi c2" data-cap="Detalle · Helechos y bananero">
         <img loading="lazy" decoding="async" src="img/16.jpg" alt="Detalle · Helechos y bananero">
         <div class="gio"><span class="giolabel">Detalle · Helechos y bananero</span></div>
       </div>
     </div>
   </div>
-
-  <!-- PROYECTO 4: Jardín con estanque y jacarandás -->
-  <div style="margin-top:48px;">
-    <div style="text-align:center;margin-bottom:28px;">
+  <div class="pblock rv">
+    <div class="phead">
       <div class="stag" style="justify-content:center;margin-bottom:8px;">Proyecto · 2023</div>
-      <h3 style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--negro);">Jardín con Estanque <em style="font-style:italic;color:var(--verde-o);">· Barrio San Joaquín</em></h3>
-      <p style="font-size:13px;color:var(--gris);margin-top:8px;font-weight:300;">Diseño biofílico con estanque de nenúfares, jacarandás existentes e iluminación exterior de bajo consumo</p>
+      <h3>Jardín con Estanque<em style="font-style:italic;color:var(--verde-o);">· Barrio San Joaquín</em></h3>
+      <p>Diseño biofílico con estanque de nenúfares, jacarandás existentes e iluminación exterior de bajo consumo</p>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:6px;">
-      <div class="gi" style="height:320px;grid-column:span 2;">
+    <div class="pgrid">
+      <div class="gi c6" data-cap="Vista diurna · Jacarandás en flor">
         <img loading="lazy" decoding="async" src="img/17.jpg" alt="Vista diurna · Jacarandás en flor">
         <div class="gio"><span class="giolabel">Vista diurna · Jacarandás en flor</span></div>
       </div>
-      <div class="gi" style="height:260px;">
+      <div class="gi c2" data-cap="Iluminación nocturna · Jacarandás">
         <img loading="lazy" decoding="async" src="img/18.jpg" alt="Iluminación nocturna · Jacarandás">
         <div class="gio"><span class="giolabel">Iluminación nocturna · Jacarandás</span></div>
       </div>
-      <div class="gi" style="height:260px;">
+      <div class="gi c2" data-cap="Estanque · Nenúfares y Buda · Atardecer">
         <img loading="lazy" decoding="async" src="img/19.jpg" alt="Estanque · Nenúfares y Buda · Atardecer">
         <div class="gio"><span class="giolabel">Estanque · Nenúfares y Buda · Atardecer</span></div>
       </div>
-      <div class="gi" style="height:260px;grid-column:span 2;">
+      <div class="gi c2" data-cap="Estanque · Nenúfares y Buda · Noche">
         <img loading="lazy" decoding="async" src="img/20.jpg" alt="Estanque · Nenúfares y Buda · Noche">
         <div class="gio"><span class="giolabel">Estanque · Nenúfares y Buda · Noche</span></div>
       </div>
     </div>
   </div>
-
-  <!-- PROYECTO 5: Jardín interior con senderos - San Joaquín -->
-  <div style="margin-top:48px;">
-    <div style="text-align:center;margin-bottom:28px;">
+  <div class="pblock rv">
+    <div class="phead">
       <div class="stag" style="justify-content:center;margin-bottom:8px;">Proyecto · 2023</div>
-      <h3 style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--negro);">Jardín Interior con Pared Verde <em style="font-style:italic;color:var(--verde-o);">· San Joaquín</em></h3>
-      <p style="font-size:13px;color:var(--gris);margin-top:8px;font-weight:300;">Distintas opciones de senderos y composición vegetal · losas rectangulares, circulares y hexagonales · pared verde con mulch volcánico</p>
+      <h3>Jardín Interior con Pared Verde<em style="font-style:italic;color:var(--verde-o);">· San Joaquín</em></h3>
+      <p>Distintas opciones de senderos y composición vegetal · losas rectangulares, circulares y hexagonales · pared verde con mulch volcánico</p>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:6px;">
-      <div class="gi" style="height:380px;grid-column:span 7;">
+    <div class="pgrid">
+      <div class="gi c6" data-cap="Sendero de losas · Vista inmersiva">
         <img loading="lazy" decoding="async" src="img/21.jpg" alt="Sendero de losas · Vista inmersiva">
         <div class="gio"><span class="giolabel">Sendero de losas · Vista inmersiva</span></div>
       </div>
-      <div class="gi" style="height:380px;grid-column:span 5;">
+      <div class="gi c2" data-cap="Sendero hexagonal · Vista desde interior">
         <img loading="lazy" decoding="async" src="img/22.jpg" alt="Sendero hexagonal · Vista desde interior">
         <div class="gio"><span class="giolabel">Sendero hexagonal · Vista desde interior</span></div>
       </div>
-      <div class="gi" style="height:260px;grid-column:span 4;">
+      <div class="gi c2" data-cap="Vista aérea · Jardín vertical">
         <img loading="lazy" decoding="async" src="img/23.jpg" alt="Vista aérea · Jardín vertical">
         <div class="gio"><span class="giolabel">Vista aérea · Jardín vertical</span></div>
       </div>
-      <div class="gi" style="height:260px;grid-column:span 4;">
-        <img loading="lazy" decoding="async" src="img/24.jpg" alt="Vista interior · Strelitzias y monstera">
-        <div class="gio"><span class="giolabel">Vista interior · Strelitzias y monstera</span></div>
-      </div>
-      <div class="gi" style="height:260px;grid-column:span 4;">
+      <div class="gi c2" data-cap="Sendero hexagonal · Vista lateral">
         <img loading="lazy" decoding="async" src="img/25.jpg" alt="Sendero hexagonal · Vista lateral">
         <div class="gio"><span class="giolabel">Sendero hexagonal · Vista lateral</span></div>
       </div>
     </div>
   </div>
-
-  <!-- PROYECTO 6: Jardín residencial con piscina y pergola -->
-  <div style="margin-top:48px;">
-    <div style="text-align:center;margin-bottom:28px;">
+  <div class="pblock rv">
+    <div class="phead">
       <div class="stag" style="justify-content:center;margin-bottom:8px;">Proyecto · 2021</div>
-      <h3 style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--negro);">Jardín Residencial con Piscina <em style="font-style:italic;color:var(--verde-o);">· La Plata</em></h3>
-      <p style="font-size:13px;color:var(--gris);margin-top:8px;font-weight:300;">Diseño completo con piscina, pergola con fogón, sendero de deck, flora nativa multiestacional · Verbena bonariensis, Phormium, Liriope, Dietes, Acer palmatum</p>
+      <h3>Jardín Residencial con Piscina<em style="font-style:italic;color:var(--verde-o);">· La Plata</em></h3>
+      <p>Diseño completo con piscina, pergola con fogón, sendero de deck, flora nativa multiestacional · Verbena bonariensis, Phormium, Liriope, Dietes, Acer palmatum</p>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:6px;">
-      <div class="gi" style="height:400px;grid-column:span 12;">
-        <img loading="lazy" decoding="async" src="img/26.jpg" alt="Vista panorámica · Lavanda y girasoles · Atardecer">
+    <div class="pgrid">
+      <div class="gi c6" data-cap="Vista panorámica · Lavanda y girasoles · Atardecer">
+        <img loading="lazy" decoding="async" src="img/27.jpg" alt="Vista panorámica · Lavanda y girasoles · Atardecer">
         <div class="gio"><span class="giolabel">Vista panorámica · Lavanda y girasoles · Atardecer</span></div>
       </div>
-      <div class="gi" style="height:300px;grid-column:span 7;">
-        <img loading="lazy" decoding="async" src="img/27.jpg" alt="Piscina · Deck y reposeras · Atardecer">
-        <div class="gio"><span class="giolabel">Piscina · Deck y reposeras · Atardecer</span></div>
+      <div class="gi c3" data-cap="Jardín en otoño · Pergola y fogón">
+        <img loading="lazy" decoding="async" src="img/30.jpg" alt="Jardín en otoño · Pergola y fogón">
+        <div class="gio"><span class="giolabel">Jardín en otoño · Pergola y fogón</span></div>
       </div>
-      <div class="gi" style="height:300px;grid-column:span 5;">
-        <img loading="lazy" decoding="async" src="img/28.jpg" alt="Jardín · Piscina integrada · Vista lateral">
-        <div class="gio"><span class="giolabel">Jardín · Piscina integrada · Vista lateral</span></div>
+      <div class="gi c3" data-cap="Piscina · Deck y reposeras">
+        <img loading="lazy" decoding="async" src="img/34.jpg" alt="Piscina · Deck y reposeras">
+        <div class="gio"><span class="giolabel">Piscina · Deck y reposeras</span></div>
       </div>
-      <div class="gi" style="height:270px;grid-column:span 6;">
-        <img loading="lazy" decoding="async" src="img/29.jpg" alt="Noche · Pergola con fogón · Iluminación">
-        <div class="gio"><span class="giolabel">Noche · Pergola con fogón · Iluminación</span></div>
+      <div class="gi c2" data-cap="Vista nocturna · Iluminación de jardín">
+        <img loading="lazy" decoding="async" src="img/35.jpg" alt="Vista nocturna · Iluminación de jardín">
+        <div class="gio"><span class="giolabel">Vista nocturna · Iluminación de jardín</span></div>
       </div>
-      <div class="gi" style="height:270px;grid-column:span 6;">
-        <img loading="lazy" decoding="async" src="img/30.jpg" alt="Detalle · Pergola y sendero de deck">
-        <div class="gio"><span class="giolabel">Detalle · Pergola y sendero de deck</span></div>
+      <div class="gi c2" data-cap="Vista aérea nocturna · Piscina">
+        <img loading="lazy" decoding="async" src="img/37.jpg" alt="Vista aérea nocturna · Piscina">
+        <div class="gio"><span class="giolabel">Vista aérea nocturna · Piscina</span></div>
       </div>
-      <!-- Planos técnicos -->
-      <div class="gi" style="height:240px;grid-column:span 4;background:#f5f5f0;">
-        <img loading="lazy" decoding="async" src="img/31.jpg" alt="Plano de plantación · Distribución por sectores" style="object-fit:contain;background:#f9f9f6;">
-        <div class="gio"><span class="giolabel">Plano de plantación · Distribución por sectores</span></div>
-      </div>
-      <div class="gi" style="height:240px;grid-column:span 4;background:#f5f5f0;">
-        <img loading="lazy" decoding="async" src="img/32.jpg" alt="Plano técnico · Especies y medidas" style="object-fit:contain;background:#f9f9f6;">
-        <div class="gio"><span class="giolabel">Plano técnico · Especies y medidas</span></div>
-      </div>
-      <div class="gi" style="height:240px;grid-column:span 4;background:#f5f5f0;">
-        <img loading="lazy" decoding="async" src="img/33.jpg" alt="Fichas botánicas · Especies nativas utilizadas" style="object-fit:contain;background:#f9f9f6;">
-        <div class="gio"><span class="giolabel">Fichas botánicas · Especies nativas utilizadas</span></div>
-      </div>
-
-    <!-- Vistas adicionales proyecto Soledad -->
-    <div style="margin-top:6px;display:grid;grid-template-columns:repeat(12,1fr);gap:6px;">
-      <div class="gi" style="height:280px;grid-column:span 5;">
-        <img loading="lazy" decoding="async" src="img/34.jpg" alt="Vista piscina · Lavanda y sendero de losas">
-        <div class="gio"><span class="giolabel">Vista piscina · Lavanda y sendero de losas</span></div>
-      </div>
-      <div class="gi" style="height:280px;grid-column:span 7;">
-        <img loading="lazy" decoding="async" src="img/35.jpg" alt="Vista nocturna · Piscina aérea con iluminación">
-        <div class="gio"><span class="giolabel">Vista nocturna · Piscina aérea con iluminación</span></div>
-      </div>
-      <div class="gi" style="height:260px;grid-column:span 4;">
-        <img loading="lazy" decoding="async" src="img/36.jpg" alt="Vista nocturna · Jardín desde la casa">
-        <div class="gio"><span class="giolabel">Vista nocturna · Jardín desde la casa</span></div>
-      </div>
-      <div class="gi" style="height:260px;grid-column:span 4;">
-        <img loading="lazy" decoding="async" src="img/37.jpg" alt="Vista nocturna aérea · Planta iluminada">
-        <div class="gio"><span class="giolabel">Vista nocturna aérea · Planta iluminada</span></div>
-      </div>
-      <div class="gi" style="height:260px;grid-column:span 4;">
-        <img loading="lazy" decoding="async" src="img/38.jpg" alt="Vista lateral · Cantero curvo y piscina">
-        <div class="gio"><span class="giolabel">Vista lateral · Cantero curvo y piscina</span></div>
-      </div>
-      <div class="gi" style="height:300px;grid-column:span 12;">
-        <img loading="lazy" decoding="async" src="img/39.jpg" alt="Cantero fondo piscina · Strelitzia y monstera">
-        <div class="gio"><span class="giolabel">Cantero fondo piscina · Strelitzia y monstera</span></div>
+      <div class="gi c2" data-cap="Piscina · Vista lateral · Flora multiestacional">
+        <img loading="lazy" decoding="async" src="img/39.jpg" alt="Piscina · Vista lateral · Flora multiestacional">
+        <div class="gio"><span class="giolabel">Piscina · Vista lateral · Flora multiestacional</span></div>
       </div>
     </div>
   </div>
-
-
-  <!-- PROYECTO 7: Espacio Fogón - Renders y Realidad -->
-  <div style="margin-top:48px;">
-    <div style="text-align:center;margin-bottom:28px;">
+  <div class="pblock rv">
+    <div class="phead">
       <div class="stag" style="justify-content:center;margin-bottom:8px;">Proyecto · 2025 · Ejecutado</div>
-      <h3 style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--negro);">Espacio Fogón <em style="font-style:italic;color:var(--verde-o);">· De la propuesta a la realidad</em></h3>
-      <p style="font-size:13px;color:var(--gris);margin-top:8px;font-weight:300;">Diseño y ejecución de espacio de reunión con fogón · gravilla volcánica · contenedor circular de plantas · bordes de madera · sendero de durmientes · La Plata</p>
+      <h3>Espacio Fogón<em style="font-style:italic;color:var(--verde-o);">· De la propuesta a la realidad</em></h3>
+      <p>Diseño y ejecución de espacio de reunión con fogón · gravilla volcánica · contenedor circular de plantas · bordes de madera · sendero de durmientes · La Plata</p>
     </div>
-
-    <!-- RENDERS -->
-    <div style="margin-bottom:6px;">
-      <div style="font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:300;color:var(--textos);letter-spacing:3px;text-transform:uppercase;text-align:center;padding:12px 0;border-top:1px solid var(--cremao);border-bottom:1px solid var(--cremao);margin-bottom:6px;">
-        Propuesta
+    <div class="pgrid">
+      <div class="gi c6" data-cap="Render · Propuesta final">
+        <img loading="lazy" decoding="async" src="img/43.jpg" alt="Render · Propuesta final">
+        <div class="gio"><span class="giolabel">Render · Propuesta final</span></div>
       </div>
-      <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:6px;">
-        <div class="gi" style="height:360px;grid-column:span 7;">
-          <img loading="lazy" decoding="async" src="img/40.jpg" alt="Render · Vista frontal diurna">
-          <div class="gio"><span class="giolabel">Render · Vista frontal diurna</span></div>
-        </div>
-        <div class="gi" style="height:360px;grid-column:span 5;">
-          <img loading="lazy" decoding="async" src="img/41.jpg" alt="Render · Vista nocturna · Fogón encendido">
-          <div class="gio"><span class="giolabel">Render · Vista nocturna · Fogón encendido</span></div>
-        </div>
-        <div class="gi" style="height:280px;grid-column:span 5;">
-          <img loading="lazy" decoding="async" src="img/42.jpg" alt="Render · Vista aérea">
-          <div class="gio"><span class="giolabel">Render · Vista aérea</span></div>
-        </div>
-        <div class="gi" style="height:280px;grid-column:span 7;">
-          <img loading="lazy" decoding="async" src="img/43.jpg" alt="Render · Propuesta final">
-          <div class="gio"><span class="giolabel">Render · Propuesta final</span></div>
-        </div>
+      <div class="gi c3" data-cap="Render · Vista diurna">
+        <img loading="lazy" decoding="async" src="img/40.jpg" alt="Render · Vista diurna">
+        <div class="gio"><span class="giolabel">Render · Vista diurna</span></div>
       </div>
-    </div>
-
-    <!-- RESULTADO REAL -->
-    <div style="margin-top:6px;">
-      <div style="font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:300;color:var(--verde-o);letter-spacing:3px;text-transform:uppercase;text-align:center;padding:12px 0;border-top:1px solid var(--cremao);border-bottom:1px solid var(--cremao);margin-bottom:6px;display:flex;align-items:center;justify-content:center;gap:12px;">
-        <span style="display:inline-block;width:8px;height:8px;background:var(--verde);border-radius:50%;"></span>
-        Resultado ejecutado
-        <span style="display:inline-block;width:8px;height:8px;background:var(--verde);border-radius:50%;"></span>
+      <div class="gi c3" data-cap="Render · Vista nocturna · Fogón encendido">
+        <img loading="lazy" decoding="async" src="img/41.jpg" alt="Render · Vista nocturna · Fogón encendido">
+        <div class="gio"><span class="giolabel">Render · Vista nocturna · Fogón encendido</span></div>
       </div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;">
-        <div class="gi" style="height:300px;">
-          <img loading="lazy" decoding="async" src="img/44.jpg" alt="Resultado real · Vista diurna">
-          <div class="gio"><span class="giolabel">Resultado real · Vista diurna</span></div>
-        </div>
-        <div class="gi" style="height:300px;">
-          <img loading="lazy" decoding="async" src="img/45.jpg" alt="Resultado real · Noche encendido">
-          <div class="gio"><span class="giolabel">Resultado real · Noche encendido</span></div>
-        </div>
-        <div class="gi" style="height:300px;">
-          <img loading="lazy" decoding="async" src="img/46.jpg" alt="Resultado real · Foto del cliente">
-          <div class="gio"><span class="giolabel">Resultado real · Foto del cliente</span></div>
-        </div>
+      <div class="gi c2" data-cap="Resultado real · Vista diurna">
+        <img loading="lazy" decoding="async" src="img/44.jpg" alt="Resultado real · Vista diurna">
+        <div class="gio"><span class="giolabel">Resultado real · Vista diurna</span></div>
+      </div>
+      <div class="gi c2" data-cap="Resultado real · Noche encendido">
+        <img loading="lazy" decoding="async" src="img/45.jpg" alt="Resultado real · Noche encendido">
+        <div class="gio"><span class="giolabel">Resultado real · Noche encendido</span></div>
+      </div>
+      <div class="gi c2" data-cap="Resultado real · Foto del cliente">
+        <img loading="lazy" decoding="async" src="img/46.jpg" alt="Resultado real · Foto del cliente">
+        <div class="gio"><span class="giolabel">Resultado real · Foto del cliente</span></div>
       </div>
     </div>
   </div>
-
-  <!-- PROYECTO 8: Jardín con piscina mediterráneo-tropical -->
-  <div style="margin-top:48px;">
-    <div style="text-align:center;margin-bottom:28px;">
+  <div class="pblock rv">
+    <div class="phead">
       <div class="stag" style="justify-content:center;margin-bottom:8px;">Proyecto · 2023</div>
-      <h3 style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--negro);">Jardín con Piscina <em style="font-style:italic;color:var(--verde-o);">· Flora Mediterránea y Tropical</em></h3>
-      <p style="font-size:13px;color:var(--gris);margin-top:8px;font-weight:300;">Diseño residencial con piscina · deck de madera · lavanda · salvia · palmeras · monstera · strelitzia · setos de hiedra · iluminación con esferas</p>
+      <h3>Jardín con Piscina<em style="font-style:italic;color:var(--verde-o);">· Flora Mediterránea y Tropical</em></h3>
+      <p>Diseño residencial con piscina · deck de madera · lavanda · salvia · palmeras · monstera · strelitzia · setos de hiedra · iluminación con esferas</p>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:6px;">
-      <div class="gi" style="height:420px;grid-column:span 12;">
-        <img loading="lazy" decoding="async" src="img/47.jpg" alt="Vista panorámica · Piscina y flora mediterránea · Atardecer">
-        <div class="gio"><span class="giolabel">Vista panorámica · Piscina y flora mediterránea · Atardecer</span></div>
+    <div class="pgrid">
+      <div class="gi c6" data-cap="Vista panorámica · Piscina y flora mediterránea">
+        <img loading="lazy" decoding="async" src="img/47.jpg" alt="Vista panorámica · Piscina y flora mediterránea">
+        <div class="gio"><span class="giolabel">Vista panorámica · Piscina y flora mediterránea</span></div>
       </div>
-      <div class="gi" style="height:300px;grid-column:span 5;">
-        <img loading="lazy" decoding="async" src="img/48.jpg" alt="Vista tropical · Monstera y palmeras · Piscina">
-        <div class="gio"><span class="giolabel">Vista tropical · Monstera y palmeras · Piscina</span></div>
+      <div class="gi c2" data-cap="Vista tropical · Monstera y palmeras">
+        <img loading="lazy" decoding="async" src="img/48.jpg" alt="Vista tropical · Monstera y palmeras">
+        <div class="gio"><span class="giolabel">Vista tropical · Monstera y palmeras</span></div>
       </div>
-      <div class="gi" style="height:300px;grid-column:span 4;">
+      <div class="gi c2" data-cap="Vista nocturna · Deck · Luces esfera">
         <img loading="lazy" decoding="async" src="img/49.jpg" alt="Vista nocturna · Deck · Luces esfera">
         <div class="gio"><span class="giolabel">Vista nocturna · Deck · Luces esfera</span></div>
       </div>
-      <div class="gi" style="height:300px;grid-column:span 3;">
-        <img loading="lazy" decoding="async" src="img/50.jpg" alt="Vista nocturna · Lavanda y salvia · Piscina">
-        <div class="gio"><span class="giolabel">Vista nocturna · Lavanda y salvia · Piscina</span></div>
+      <div class="gi c2" data-cap="Vista nocturna · Lavanda y salvia">
+        <img loading="lazy" decoding="async" src="img/50.jpg" alt="Vista nocturna · Lavanda y salvia">
+        <div class="gio"><span class="giolabel">Vista nocturna · Lavanda y salvia</span></div>
       </div>
     </div>
   </div>
-
-  <!-- PROYECTO 9: Restaurante PIBÄ - Espacio Corporativo -->
-  <div style="margin-top:48px;">
-    <div style="text-align:center;margin-bottom:28px;">
+  <div class="pblock rv">
+    <div class="phead">
       <div class="stag" style="justify-content:center;margin-bottom:8px;">Proyecto Corporativo · 2019 · Ejecutado</div>
-      <h3 style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--negro);">Restaurante -PIBÄ- <em style="font-style:italic;color:var(--verde-o);">· Fachada Verde · La Plata</em></h3>
-      <p style="font-size:13px;color:var(--gris);margin-top:8px;font-weight:300;">Diseño e instalación de jardín vertical y hiedra trepadora en fachada comercial · techo verde · maceteros de acceso · centro de La Plata</p>
+      <h3>Restaurante -PIBÄ-<em style="font-style:italic;color:var(--verde-o);">· Fachada Verde · La Plata</em></h3>
+      <p>Diseño e instalación de jardín vertical y hiedra trepadora en fachada comercial · techo verde · maceteros de acceso · centro de La Plata</p>
     </div>
-
-    <!-- ANTES -->
-    <div style="margin-bottom:6px;">
-      <div style="font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:300;color:var(--textos);letter-spacing:3px;text-transform:uppercase;text-align:center;padding:10px 0;border-top:1px solid var(--cremao);border-bottom:1px solid var(--cremao);margin-bottom:6px;">
-        Antes
+    <div class="pgrid">
+      <div class="gi c3" data-cap="Resultado · Vista exterior completa">
+        <img loading="lazy" decoding="async" src="img/53.jpg" alt="Resultado · Vista exterior completa">
+        <div class="gio"><span class="giolabel">Resultado · Vista exterior completa</span></div>
       </div>
-      <div class="gi" style="height:340px;">
+      <div class="gi c3" data-cap="Resultado · Vista nocturna · Luces y hiedra">
+        <img loading="lazy" decoding="async" src="img/54.jpg" alt="Resultado · Vista nocturna · Luces y hiedra">
+        <div class="gio"><span class="giolabel">Resultado · Vista nocturna · Luces y hiedra</span></div>
+      </div>
+      <div class="gi c2" data-cap="Antes · Fachada sin vegetación">
         <img loading="lazy" decoding="async" src="img/51.jpg" alt="Antes · Fachada sin vegetación">
         <div class="gio"><span class="giolabel">Antes · Fachada sin vegetación</span></div>
       </div>
-    </div>
-
-    <!-- DURANTE -->
-    <div style="margin-bottom:6px;">
-      <div style="font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:300;color:var(--textos);letter-spacing:3px;text-transform:uppercase;text-align:center;padding:10px 0;border-top:1px solid var(--cremao);border-bottom:1px solid var(--cremao);margin-bottom:6px;">
-        Durante
-      </div>
-      <div class="gi" style="height:340px;">
+      <div class="gi c2" data-cap="Durante · Instalación de hiedra trepadora">
         <img loading="lazy" decoding="async" src="img/52.jpg" alt="Durante · Instalación de hiedra trepadora">
         <div class="gio"><span class="giolabel">Durante · Instalación de hiedra trepadora</span></div>
       </div>
-    </div>
-
-    <!-- RESULTADO -->
-    <div>
-      <div style="font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:300;color:var(--verde-o);letter-spacing:3px;text-transform:uppercase;text-align:center;padding:10px 0;border-top:1px solid var(--cremao);border-bottom:1px solid var(--cremao);margin-bottom:6px;display:flex;align-items:center;justify-content:center;gap:12px;">
-        <span style="display:inline-block;width:8px;height:8px;background:var(--verde);border-radius:50%;"></span>
-        Resultado ejecutado
-        <span style="display:inline-block;width:8px;height:8px;background:var(--verde);border-radius:50%;"></span>
+      <div class="gi c2" data-cap="Detalle · Jardín vertical en columna">
+        <img loading="lazy" decoding="async" src="img/56.jpg" alt="Detalle · Jardín vertical en columna">
+        <div class="gio"><span class="giolabel">Detalle · Jardín vertical en columna</span></div>
       </div>
-      <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:6px;">
-        <div class="gi" style="height:360px;grid-column:span 7;">
-          <img loading="lazy" decoding="async" src="img/53.jpg" alt="Resultado · Vista exterior completa · -PIBÄ-">
-          <div class="gio"><span class="giolabel">Resultado · Vista exterior completa · -PIBÄ-</span></div>
-        </div>
-        <div class="gi" style="height:360px;grid-column:span 5;">
-          <img loading="lazy" decoding="async" src="img/54.jpg" alt="Resultado · Vista nocturna · Luces y hiedra">
-          <div class="gio"><span class="giolabel">Resultado · Vista nocturna · Luces y hiedra</span></div>
-        </div>
-        <div class="gi" style="height:280px;grid-column:span 4;">
-          <img loading="lazy" decoding="async" src="img/55.jpg" alt="Resultado · Fachada con hiedra · Vista lateral">
-          <div class="gio"><span class="giolabel">Resultado · Fachada con hiedra · Vista lateral</span></div>
-        </div>
-        <div class="gi" style="height:280px;grid-column:span 4;">
-          <img loading="lazy" decoding="async" src="img/56.jpg" alt="Resultado · Detalle jardín vertical en columna">
-          <div class="gio"><span class="giolabel">Resultado · Detalle jardín vertical en columna</span></div>
-        </div>
-        <div class="gi" style="height:280px;grid-column:span 4;">
-          <img loading="lazy" decoding="async" src="img/57.jpg" alt="Resultado · Techo verde con enredadera">
-          <div class="gio"><span class="giolabel">Resultado · Techo verde con enredadera</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- foto extra como destacada debajo -->
-  <div style="margin-top:6px;">
-    <div class="gi" style="height:380px;">
-      <img loading="lazy" decoding="async" src="img/58.jpg" alt="Jardín interno · perspectiva completa">
-      <div class="gio"><span class="giolabel">Jardín interno · perspectiva completa · La Plata</span></div>
     </div>
   </div>
 </section>
 
-<!-- SOBRE NOSOTROS -->
 <section class="sobre" id="sobre">
   <div class="simgs rv">
     <img loading="lazy" decoding="async" class="simg1" src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?w=700&q=80" alt="Lautaro Parente paisajista La Plata">
@@ -857,6 +874,24 @@ footer{background:#111;padding:32px 64px;display:flex;justify-content:space-betw
 </footer>
 
 <script>
+// Menú móvil
+const navEl = document.getElementById('nav');
+const burger = document.getElementById('nburger');
+if (burger) {
+  burger.addEventListener('click', () => {
+    const abierto = navEl.classList.toggle('open');
+    burger.innerHTML = abierto ? '&#10005;' : '&#9776;';
+    burger.setAttribute('aria-expanded', abierto ? 'true' : 'false');
+  });
+  document.querySelectorAll('.nlinks a').forEach(a => {
+    a.addEventListener('click', () => {
+      navEl.classList.remove('open');
+      burger.innerHTML = '&#9776;';
+      burger.setAttribute('aria-expanded', 'false');
+    });
+  });
+}
+
 // Cursor
 const cur = document.getElementById('cur');
 const ring = document.getElementById('curring');
@@ -878,6 +913,43 @@ const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('on'); });
 }, { threshold: 0.12 });
 document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+
+// Visor de imagen ampliada
+const fotos = Array.from(document.querySelectorAll('.pgrid .gi'));
+const lb = document.getElementById('lb');
+const lbimg = document.getElementById('lbimg');
+const lbcap = document.getElementById('lbcap');
+let actual = 0;
+
+function mostrar(i){
+  if(!fotos.length) return;
+  actual = (i + fotos.length) % fotos.length;
+  const el = fotos[actual];
+  lbimg.src = el.querySelector('img').getAttribute('src');
+  lbcap.textContent = el.dataset.cap || '';
+}
+function abrir(i){ mostrar(i); lb.classList.add('open'); document.body.style.overflow='hidden'; }
+function cerrar(){ lb.classList.remove('open'); document.body.style.overflow=''; }
+
+fotos.forEach((el,i) => el.addEventListener('click', () => abrir(i)));
+document.getElementById('lbx').addEventListener('click', cerrar);
+document.getElementById('lbprev').addEventListener('click', e => { e.stopPropagation(); mostrar(actual-1); });
+document.getElementById('lbnext').addEventListener('click', e => { e.stopPropagation(); mostrar(actual+1); });
+lb.addEventListener('click', e => { if(e.target === lb) cerrar(); });
+document.addEventListener('keydown', e => {
+  if(!lb.classList.contains('open')) return;
+  if(e.key === 'Escape') cerrar();
+  if(e.key === 'ArrowLeft') mostrar(actual-1);
+  if(e.key === 'ArrowRight') mostrar(actual+1);
+});
 </script>
+<div class="lb" id="lb" role="dialog" aria-label="Imagen ampliada">
+  <button class="lbx" id="lbx" aria-label="Cerrar">&#10005;</button>
+  <button class="lbnav lbprev" id="lbprev" aria-label="Anterior">&#8249;</button>
+  <img id="lbimg" src="" alt="">
+  <button class="lbnav lbnext" id="lbnext" aria-label="Siguiente">&#8250;</button>
+  <div class="lbcap" id="lbcap"></div>
+</div>
+
 </body>
 </html>
